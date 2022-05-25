@@ -1,24 +1,22 @@
-<h1 id="tableLabel">Weather forecast</h1>
+<h1 id="tableLabel">Your last dares</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<p *ngIf="!randomDareHistories"><em>Loading...</em></p>
 
-<p *ngIf="!forecasts"><em>Loading...</em></p>
-
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="forecasts">
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="randomDareHistories">
   <thead>
     <tr>
-      <th>Date</th>
-      <th>Temp. (C)</th>
-      <th>Temp. (F)</th>
-      <th>Summary</th>
+      <th>UserUUid</th>
+      <th>DareUuid</th>
+      <th>Completed</th>
+      <th>Given Time</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let forecast of forecasts">
-      <td>{{ forecast.date }}</td>
-      <td>{{ forecast.temperatureC }}</td>
-      <td>{{ forecast.temperatureF }}</td>
-      <td>{{ forecast.summary }}</td>
+    <tr *ngFor="let randomDareHistory of randomDareHistories">
+      <td>{{ randomDareHistory.userUuid }}</td>
+      <td>{{ randomDareHistory.randomDareUuid }}</td>
+      <td>{{ randomDareHistory.completed }}</td>
+      <td>{{ randomDareHistory.receivedAtUnixUtcTimestamp }}</td>
     </tr>
   </tbody>
 </table>

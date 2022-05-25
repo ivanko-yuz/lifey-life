@@ -1,23 +1,18 @@
-using LyfiLife.Core;
 using LyfiLife.Core.Contracts;
 using LyfiLife.Core.Models;
 
-namespace LyfiLife.Data;
+namespace LyfiLife.Data.DataServices;
 
 public class HistoryDataService : IHistoryDataService
 {
-    private static readonly string[] Summaries = new[]
+    public Task<List<RandomDareHistory>> ListHistory(Guid userUuid)
     {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
-    public Task<List<HistoryRecord>> GetAllHistory()
-    {
-        return Task.FromResult(new List<HistoryRecord>(Enumerable.Range(1, 5).Select(index => new HistoryRecord
+        return Task.FromResult(new List<RandomDareHistory>(Enumerable.Range(1, 5).Select(index => new RandomDareHistory
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+                UserUuid = Guid.NewGuid(),
+                RandomDareUuid = Guid.NewGuid(),
+                Completed = true,
+                ReceivedAtUnixUtcTimestamp = 1
             })
             .ToArray()));
     }

@@ -7,13 +7,13 @@ namespace LyfiLife.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class RandomDareHistoryController : ControllerBase
     {
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<RandomDareHistoryController> _logger;
         private readonly IHistoryDataService _historyDataService;
 
-        public WeatherForecastController(
-            ILogger<WeatherForecastController> logger,
+        public RandomDareHistoryController(
+            ILogger<RandomDareHistoryController> logger,
             IHistoryDataService historyDataService)
         {
             _logger = logger;
@@ -21,9 +21,9 @@ namespace LyfiLife.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<HistoryRecord>> Get()
+        public async Task<IEnumerable<RandomDareHistory>> Get()
         {
-            return await _historyDataService.GetAllHistory();
+            return await _historyDataService.ListHistory(Guid.NewGuid());
         }
     }
 }

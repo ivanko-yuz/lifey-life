@@ -5,11 +5,11 @@ using LyfiLife.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
-    .ConfigureContainer<ContainerBuilder>(builder =>
+    .ConfigureContainer<ContainerBuilder>((hostBuilderContext, containerBuilder) =>
     {
-        builder.RegisterModule<LyfiLifeApiModule>();
-        builder.RegisterModule<LyfiLifeCoreModule>();
-        builder.RegisterModule<LyfiLifeDataModule>();
+        containerBuilder.RegisterModule<LyfiLifeApiModule>();
+        containerBuilder.RegisterModule<LyfiLifeCoreModule>();
+        containerBuilder.RegisterModule(new LyfiLifeDataModule(hostBuilderContext.Configuration));
     });
 
 // Add services to the container.

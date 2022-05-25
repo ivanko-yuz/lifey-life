@@ -4,5 +4,5 @@ namespace LyfiLife.Core.Contracts;
 
 public interface IHistoryDataService
 {
-    Task<List<HistoryRecord>> GetAllHistory();
+    Task<List<RandomDareHistory>> ListHistory(Guid userUuid);
 }

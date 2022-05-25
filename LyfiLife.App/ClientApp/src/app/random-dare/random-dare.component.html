@@ -1,0 +1,24 @@
+<h1 id="tableLabel">Your last dares</h1>
+
+<p *ngIf="!randomDares"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="randomDares">
+  <thead>
+    <tr>
+      <th>uuid</th>
+      <th>language</th>
+      <th>language</th>
+      <th>experienceGained</th>
+      <th>Given Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let randomDare of randomDares">
+      <td>{{ randomDare.uuid }}</td>
+      <td>{{ randomDare.language }}</td>
+      <td>{{ randomDare.context }}</td>
+      <td>{{ randomDare.experienceGained }}</td>
+      <td>{{ randomDare.givenTime }}</td>
+    </tr>
+  </tbody>
+</table>
