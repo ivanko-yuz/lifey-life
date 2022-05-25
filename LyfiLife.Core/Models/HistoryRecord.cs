@@ -1,6 +1,6 @@
-namespace LyfiLife;
+namespace LyfiLife.Core.Models;
 
-public class WeatherForecast
+public record HistoryRecord
 {
     public DateTime Date { get; set; }
 
