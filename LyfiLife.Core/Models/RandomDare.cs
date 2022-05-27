@@ -2,9 +2,9 @@ namespace LyfiLife.Core.Models;
 
 public record RandomDare
 {
-    public Guid Uuid { get; set; }
-    public LocalizationType Language { get; set; }
-    public string Context { get; set; }
-    public int ExperienceGained { get; set; }
-    public int GivenTime { get; set; }
+    public Guid Uuid { get; init; }
+    public LocalizationType Language { get; init; }
+    public string Context { get; init; }
+    public int ExperienceGained { get; init; }
+    public int GivenTime { get; init; }
 }

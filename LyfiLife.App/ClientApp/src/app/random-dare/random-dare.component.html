@@ -1,24 +1,16 @@
-<h1 id="tableLabel">Your last dares</h1>
+<p *ngIf="!randomDare"><em>Loading...</em></p>
 
-<p *ngIf="!randomDares"><em>Loading...</em></p>
+<div class="padding100 color-white text1">Random dare</div>
+<mat-card class="example-card" *ngIf="randomDare">
+  <mat-card-content class="padding25 color-white text2">
+    <p>{{ randomDare.context }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button class="menu-btn color-gray text3" (click)="Complete()">Compele</button>
+    <button class="menu-btn color-gray text3" (click)="YetAnotherDare()">Get Another</button>
+  </mat-card-actions>
+  <mat-card-footer>
+<!--    <mat-progress-bar mode="indeterminate"></mat-progress-bar>-->
+  </mat-card-footer>
+</mat-card>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="randomDares">
-  <thead>
-    <tr>
-      <th>uuid</th>
-      <th>language</th>
-      <th>language</th>
-      <th>experienceGained</th>
-      <th>Given Time</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let randomDare of randomDares">
-      <td>{{ randomDare.uuid }}</td>
-      <td>{{ randomDare.language }}</td>
-      <td>{{ randomDare.context }}</td>
-      <td>{{ randomDare.experienceGained }}</td>
-      <td>{{ randomDare.givenTime }}</td>
-    </tr>
-  </tbody>
-</table>

@@ -1,0 +1,20 @@
+<h1 id="tableLabel" class="padding25 color-white text1">Your last dares</h1>
+
+<p *ngIf="!randomDareHistories"><em>Loading...</em></p>
+
+<table class='color-white' aria-labelledby="tableLabel" *ngIf="randomDareHistories">
+  <thead>
+    <tr>
+      <th>Dare</th>
+      <th>completed</th>
+      <th>Completed At</th>
+    </tr>
+  </thead>
+  <tbody class="color-white">
+    <tr *ngFor="let randomDareHistory of randomDareHistories">
+      <td>{{ randomDareHistory.context }}</td>
+      <td>{{ randomDareHistory.completed }}</td>
+      <td>{{ randomDareHistory.completedAt}}</td>
+    </tr>
+  </tbody>
+</table>
