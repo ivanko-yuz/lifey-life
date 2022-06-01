@@ -1,5 +1,11 @@
 # LifeyLife
 
+### Idea
+
+### Idea
+ToDo:
+ - add authentication
+ - add localization
 
 ### Tech Overview
 This service is a dedicated BFF (backend for frontent) service for the LifeyLife.
