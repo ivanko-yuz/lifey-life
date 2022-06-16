@@ -8,16 +8,21 @@
   "commitBody": "Updates-dependency: {{depName}}\r\nUpdates-dependency-from-version: {{currentVersion}}\r\nUpdates-dependency-to-version: {{newVersion}}",
   "packageRules": [
     {
-      "matchPackagePatterns": [
-        "*"
-      ],
-      "matchUpdateTypes": [
-        "major",
-        "minor",
-        "patch"
-      ],
       "groupName": "all dependencies",
-      "groupSlug": "all-dependencies"
+      "separateMajorMinor": false,
+      "groupSlug": "all",
+      "packageRules": [
+        {
+          "matchPackagePatterns": [
+            "*"
+          ],
+          "groupName": "all dependencies",
+          "groupSlug": "all"
+        }
+      ],
+      "lockFileMaintenance": {
+        "enabled": false
+      }
     }
   ],
   "labels": [
