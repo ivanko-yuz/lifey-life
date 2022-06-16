@@ -8,12 +8,8 @@
   "commitBody": "Updates-dependency: {{depName}}\r\nUpdates-dependency-from-version: {{currentVersion}}\r\nUpdates-dependency-to-version: {{newVersion}}",
   "packageRules": [
     {
-      "matchSourceUrlPrefixes": [
-        "https://github.com/dotnet/aspnetcore",
-        "https://github.com/dotnet/efcore",
-        "https://github.com/dotnet/extensions",
-        "https://github.com/dotnet/runtime"
-      ]
+      "packagePatterns": ["nuget"],
+      "groupName": "nuget"
     }
   ],
   "labels": [
