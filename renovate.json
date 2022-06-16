@@ -1,0 +1,32 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "semanticCommits": false,
+  "commitMessagePrefix": "Renovate ",
+  "commitMessageAction": "Upgrade ",
+  "commitMessageTopic": "dependencies {{depName}}",
+  "commitBody": "Updates-dependency: {{depName}}\r\nUpdates-dependency-from-version: {{currentVersion}}\r\nUpdates-dependency-to-version: {{newVersion}}",
+  "packageRules": [
+    {
+      "groupName": "all dependencies",
+      "separateMajorMinor": false,
+      "groupSlug": "all",
+      "packageRules": [
+        {
+          "matchPackagePatterns": [
+            "*"
+          ],
+          "groupName": "all dependencies",
+          "groupSlug": "all"
+        }
+      ],
+      "lockFileMaintenance": {
+        "enabled": false
+      }
+    }
+  ],
+  "labels": [
+    "dependencies"
+  ]
+}
