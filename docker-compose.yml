@@ -3,7 +3,7 @@ version: '3.6'
 services:
   lifeylifedb:
     container_name: lifeylifedb
-    image: postgres:11.13
+    image: postgres:14.3
     restart: unless-stopped
     environment:
       POSTGRES_DB: postgres
