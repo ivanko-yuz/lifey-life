@@ -8,8 +8,16 @@
   "commitBody": "Updates-dependency: {{depName}}\r\nUpdates-dependency-from-version: {{currentVersion}}\r\nUpdates-dependency-to-version: {{newVersion}}",
   "packageRules": [
     {
-      "packagePatterns": ["nuget"],
-      "groupName": "nuget"
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch"
+      ],
+      "groupName": "all dependencies",
+      "groupSlug": "all-dependencies"
     }
   ],
   "labels": [
