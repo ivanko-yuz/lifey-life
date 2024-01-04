@@ -8,6 +8,7 @@ const PROXY_CONFIG = [
     context: [
       "/randomdarehistory",
       "/randomdare",
+      "/accounts",
    ],
     target: target,
     secure: false,

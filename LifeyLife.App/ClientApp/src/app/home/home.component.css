@@ -1,0 +1,6 @@
+.gif-background {
+  background-image: url('./../../assets/logo.gif');
+  background-repeat: round;
+  width: 100vw;
+  height: 100vh;
+}

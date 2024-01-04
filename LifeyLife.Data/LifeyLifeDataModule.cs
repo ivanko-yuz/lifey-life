@@ -1,7 +1,8 @@
-using System;
 using Autofac;
 using LifeyLife.Core.Contracts;
+using LifeyLife.Core.Contracts.Authentication;
 using LifeyLife.Data.DataServices;
+using LifeyLife.Data.DataServices.Authentication;
 using Microsoft.Extensions.Configuration;
 
 namespace LifeyLife.Data;
@@ -23,5 +24,6 @@ public class LifeyLifeDataModule : Module
                 throw new InvalidOperationException("Connection string not defined.")));
         builder.RegisterType<HistoryDataService>().As<IHistoryDataService>();
         builder.RegisterType<RandomDareDataService>().As<IRandomDareDataService>();
+        builder.RegisterType<AccountsDataService>().As<IAccountsDataService>();
     }
 }

@@ -11,6 +11,9 @@ import { CounterComponent } from './counter/counter.component';
 import { RandomeDareHistoryComponent } from './random-dare-history/random-dare-history.component';
 import { RandomDareComponent } from './random-dare/random-dare.component';
 
+import { AuthenticationModule } from './authentication/authentication.module'
+
+
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
@@ -35,9 +38,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatButtonModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'authentication', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
       { path: 'counter', component: CounterComponent },
       { path: 'random-dare', component: RandomDareComponent },
       { path: 'random-dare-history', component: RandomeDareHistoryComponent },
+      { path: '', redirectTo: '/home', pathMatch: 'full' },
+      { path: '**', redirectTo: '/404', pathMatch: 'full'}
     ]),
     BrowserAnimationsModule
   ],
