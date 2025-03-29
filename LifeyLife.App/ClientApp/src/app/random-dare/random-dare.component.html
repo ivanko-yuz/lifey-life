@@ -1,16 +1,46 @@
-<p *ngIf="!randomDare"><em>Loading...</em></p>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="text-center mb-0">Random Dare</h2>
+        </div>
+        <div class="card-body">
+          <div *ngIf="isLoading" class="text-center">
+            <div class="spinner-border text-warning" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
 
-<div class="padding100 color-white text1">Random dare</div>
-<mat-card class="example-card" *ngIf="randomDare">
-  <mat-card-content class="padding25 color-white text2">
-    <p>{{ randomDare.context }}</p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button class="menu-btn color-gray text3" (click)="Complete()">Compele</button>
-    <button class="menu-btn color-gray text3" (click)="YetAnotherDare()">Get Another</button>
-  </mat-card-actions>
-  <mat-card-footer>
-<!--    <mat-progress-bar mode="indeterminate"></mat-progress-bar>-->
-  </mat-card-footer>
-</mat-card>
+          <div *ngIf="error" class="alert alert-danger">
+            {{ error }}
+          </div>
+
+          <div *ngIf="currentDare && !isLoading" class="text-center">
+            <h3 class="mb-4">{{ currentDare.context }}</h3>
+            <div class="dare-info">
+              <div class="info-item">
+                <span class="label">Experience Points:</span>
+                <span class="value">{{ currentDare.experienceGained }} XP</span>
+              </div>
+              <div class="info-item">
+                <span class="label">Time Given:</span>
+                <span class="value">{{ currentDare.givenTime }} minutes</span>
+              </div>
+            </div>
+            <div class="mt-4">
+              <button class="btn btn-primary me-3" (click)="completeDare()">Complete Dare</button>
+              <button class="btn btn-secondary" (click)="getRandomDare()">Get Another Dare</button>
+            </div>
+          </div>
+
+          <div *ngIf="!currentDare && !isLoading" class="text-center">
+            <p>No dare available at the moment.</p>
+            <button class="btn btn-primary" (click)="getRandomDare()">Get New Dare</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 

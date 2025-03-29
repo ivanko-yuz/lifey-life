@@ -1,25 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>LifeyLife.Core</RootNamespace>
+        <LangVersion>11.0</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Autofac" Version="6.3.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="6.0.5" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.2.0" />
-        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.10.0" />
-        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.10.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="Microsoft.Extensions.Identity.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
-        <HintPath>..\..\..\.nuget\packages\microsoft.extensions.identity.core\6.0.5\lib\net6.0\Microsoft.Extensions.Identity.Core.dll</HintPath>
-      </Reference>
-      <Reference Include="Microsoft.Extensions.Options" />
+        <PackageReference Include="Autofac" Version="7.1.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.1" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.2.0" />
     </ItemGroup>
 
 </Project>

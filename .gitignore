@@ -1,5 +1,45 @@
+# .NET Core
 bin/
 obj/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+.vs/
+.vscode/
+
+# Environment files
+.env
+.env.*
+appsettings.*.json
+!appsettings.json
+!appsettings.Example.json
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Dependencies
+node_modules/
+packages/
+
+# Build results
+dist/
+build/
+out/
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+
 /packages/
 riderModule.iml
 /_ReSharper.Caches/

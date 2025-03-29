@@ -1,18 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\LifeyLife.Core\LifeyLife.Core.csproj" />
+        <PackageReference Include="Autofac" Version="7.1.0" />
+        <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-      <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.5" />
+        <ProjectReference Include="..\LifeyLife.Core\LifeyLife.Core.csproj" />
+        <ProjectReference Include="..\LifeyLife.Data\LifeyLife.Data.csproj" />
     </ItemGroup>
 
 </Project>

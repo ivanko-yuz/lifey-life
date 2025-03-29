@@ -1,22 +1,26 @@
 import { UserForRegistration } from './../../_interfaces/user/userForRegistration.model';
-import { RegistrationResponse } from './../../_interfaces/response/registrationResponse.model';
 import { HttpClient } from '@angular/common/http';
 import {Inject, Injectable} from '@angular/core';
+import { Observable } from 'rxjs';
+import { API_ENDPOINTS } from '../constants/api.constants';
+
+export interface RegistrationResponse {
+  success: boolean;
+  message: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  @Inject('BASE_URL') private baseUrl: string;
+  constructor(private http: HttpClient) { }
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    this.baseUrl = baseUrl;
+  register(email: string, password: string): Observable<RegistrationResponse> {
+    const body = { email, password };
+    return this.http.post<RegistrationResponse>(API_ENDPOINTS.REGISTRATION, body);
   }
+
   public registerUser = (route: string, body: UserForRegistration) => {
-    return this.http.post<RegistrationResponse> (this.baseUrl + 'accounts/registration', body);
+    return this.http.post<RegistrationResponse> (API_ENDPOINTS.REGISTRATION, body);
   }
-  // private createCompleteRoute = (route: string, envAddress: string) => {
-  //   console.log(`${envAddress}${route}`);
-  //   return `${envAddress}${route}`;
-  // }
 }

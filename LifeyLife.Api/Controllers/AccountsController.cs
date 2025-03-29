@@ -2,64 +2,64 @@ using System.IdentityModel.Tokens.Jwt;
 using LifeyLife.Core.Contracts.Authentication;
 using LifeyLife.Core.Models;
 using LifeyLife.Core.Models.Auth;
-using LifeyLife.Core.Models.Authentication;
 using LifeyLife.Core.Services;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LifeyLife.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/accounts")]
     public class AccountsController : ControllerBase
     {
-        private readonly IAccountsService _accountsService; 
+        private readonly IAccountsService _accountsService;
         private readonly JwtHandler _jwtHandler;
-    
-        public AccountsController(IAccountsService accountsService, JwtHandler jwtHandler) 
+
+        public AccountsController(
+            IAccountsService accountsService,
+            JwtHandler jwtHandler)
         {
             _accountsService = accountsService;
             _jwtHandler = jwtHandler;
         }
-    
-        [HttpPost]
-        [Route("Login")]
-        public async Task<IActionResult> Login([FromBody] AuthenticationUser userForAuthentication)
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegistrationUser registration)
         {
-            var user = await _accountsService.FindByName(userForAuthentication.Email);
-            if (user == null || !await _accountsService.CheckPassword(user, userForAuthentication.Password))
-                return Unauthorized(new AuthenticationResponse { ErrorMessage = "Invalid Authentication" });
+            if (registration.Password != registration.ConfirmPassword)
+            {
+                return BadRequest(new { Error = "Passwords do not match" });
+            }
+
+            var user = new User
+            {
+                Uuid = Guid.NewGuid(),
+                Email = registration.Email
+            };
+
+            var result = await _accountsService.CreateUser(user, registration.Password);
+            if (!result)
+            {
+                return BadRequest(new { Error = "Failed to create user" });
+            }
+
+            return Ok(new { Message = "User registered successfully" });
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] AuthenticationUser login)
+        {
+            var user = await _accountsService.FindByName(login.Email);
+            if (user == null || !await _accountsService.CheckPassword(user, login.Password))
+            {
+                return Unauthorized(new { Error = "Invalid email or password" });
+            }
+
             var signingCredentials = _jwtHandler.GetSigningCredentials();
             var claims = _jwtHandler.GetClaims(user);
             var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
             var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-            return Ok(new AuthenticationResponse { IsAuthSuccessful = true, Token = token });
-        }
-    
-        [HttpPost] 
-        [Route("Registration")]
-        public async Task<IActionResult> RegisterUser([FromBody] RegistrationUser userForRegistration) 
-        {
-            if (userForRegistration == null || !ModelState.IsValid) 
-                return BadRequest(); 
-            
-            var user = new User()
-            {
-                FirstName = userForRegistration.FirstName,
-                LastName = userForRegistration.LastName,
-                Email = userForRegistration.Email,
-                Password = userForRegistration.Password,
-                ConfirmPassword = userForRegistration.ConfirmPassword
-            };
 
-            var result = await _accountsService.CreateUser(user, userForRegistration.Password); 
-            if (!result) 
-            {
-
-                return BadRequest(new RegistrationResponse { Errors = new []{ "Something went wrong;"} }); 
-            }
-            
-            return StatusCode(201); 
+            return Ok(new { Token = token });
         }
     }
 }

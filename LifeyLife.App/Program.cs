@@ -10,6 +10,16 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure URLs based on environment
+if (builder.Environment.IsDevelopment())
+{
+    builder.WebHost.UseUrls("http://localhost:5005", "https://localhost:5555");
+}
+else
+{
+    builder.WebHost.UseUrls("https://localhost:5555");
+}
+
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
     .ConfigureContainer<ContainerBuilder>((hostBuilderContext, containerBuilder) =>
     {
@@ -38,6 +48,19 @@ builder.Services.AddAuthentication(opt =>
             .GetBytes(jwtSettings.GetSection("securityKey").Value))
     };
 });
+
+// Add CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 builder.Services.AddScoped<JwtHandler>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -45,26 +68,24 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-app.UseAuthentication();
-app.UseAuthorization();
-
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    app.UseHsts();
+    app.UseHttpsRedirection();
+}
 
-app.UseHttpsRedirection();
+app.UseCors("AllowAll");
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseStaticFiles();
 app.UseRouting();
-
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
 
 app.MapFallbackToFile("index.html");
 
