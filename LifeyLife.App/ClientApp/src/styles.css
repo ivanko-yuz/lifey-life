@@ -3,8 +3,8 @@
 
 /* Global styles */
 :root {
-  --neon-yellow: #ffd700;
-  --neon-yellow-light: #ffed4a;
+  --neon-yellow: #f59a25;
+  --neon-yellow-light: #f7b14d;
   --dark-bg: #1a1a1a;
   --darker-bg: #121212;
 }
@@ -175,8 +175,8 @@ body::before {
 }
 
 .btn-primary:disabled {
-  background-color: rgba(255, 215, 0, 0.5);
-  border-color: rgba(255, 215, 0, 0.5);
+  background-color: rgba(245, 154, 37, 0.5);
+  border-color: rgba(245, 154, 37, 0.5);
   box-shadow: none;
   transform: none;
 }
@@ -189,7 +189,7 @@ body::before {
 }
 
 .btn-secondary:hover {
-  background-color: rgba(255, 215, 0, 0.1);
+  background-color: rgba(245, 154, 37, 0.1);
   box-shadow: 0 0 20px var(--neon-yellow);
   transform: translateY(-2px);
 }
@@ -377,7 +377,7 @@ main > .container {padding-top: 15px !important;}
 .color-green {color: #3CC752; border-color: #3CC752;}
 .color-gray {color: #B2ADAD; border-color: #B2ADAD;}
 .color-white {color: #FFFFFF; border-color: #FFFFFF;}
-.color-yellow {color: #F2C94C; border-color: #F2C94C;}
+.color-yellow {color: #f59a25; border-color: #f59a25;}
 .color-input {color: #A6F0F0; border-color: #A6F0F0;}
 ::placeholder {color: #A6F0F0;}
 input, input:active, select {

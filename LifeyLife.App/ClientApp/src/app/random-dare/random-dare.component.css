@@ -6,7 +6,8 @@
               0 0 30px #ffd700;
   backdrop-filter: blur(10px);
   border-radius: 15px;
-  animation: neonGlow 2s ease-in-out infinite alternate;
+  animation: none !important;
+  transform: none !important;
 }
 
 .card-header {

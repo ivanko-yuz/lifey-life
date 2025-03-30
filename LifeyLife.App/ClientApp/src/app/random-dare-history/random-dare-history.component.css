@@ -8,6 +8,8 @@
   backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
+  animation: none !important;
+  transform: none !important;
 }
 
 .card-header {
