@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 namespace LifeyLife.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/random-dare")]
     public class RandomDareController : ControllerBase
     {
         private readonly ILogger<RandomDareController> _logger;

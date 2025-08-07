@@ -11,13 +11,15 @@ create table public.random_dare
 
 create table public.user
 (
-    uuid               uuid        not null primary key default (uuid_generate_v4()),
-    default_language   language    not null,
-    first_name         varchar(50) not null,
-    last_name          varchar(50) not null,
-    user_name          varchar(50) not null,
-    current_level      integer     not null,
-    current_experience integer     not null
+    uuid               uuid         not null primary key default (uuid_generate_v4()),
+    default_language   language     not null,
+    first_name         varchar(50)  not null,
+    last_name          varchar(50)  not null,
+    user_name          varchar(50)  null,
+    email              varchar(50)  not null,
+    password_hash      varchar(255) not null,
+    current_level      integer      not null,
+    current_experience integer      not null
 );
 
 create table public.random_dare_history

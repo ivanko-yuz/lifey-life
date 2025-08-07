@@ -1,0 +1,32 @@
+/* Component-specific styles only */
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-container {
+  flex: 1;
+  position: relative;
+  min-height: calc(100vh - 56px); /* Subtract navbar height */
+  overflow: hidden;
+}
+
+.gif-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: url('/assets/background.gif') center/cover no-repeat;
+  filter: blur(8px);
+  opacity: 0.3;
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  min-height: 100%;
+} 

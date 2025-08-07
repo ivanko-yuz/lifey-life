@@ -1,0 +1,14 @@
+<nav class="navbar" *ngIf="!isAuthPage">
+  <a class="navbar-brand" [routerLink]="['/']">LifeyLife</a>
+  <div class="nav-links">
+    <ng-container *ngIf="isLoggedIn">
+      <a class="nav-link" [routerLink]="['/random-dare']" routerLinkActive="active">Random Dare</a>
+      <a class="nav-link" [routerLink]="['/random-dare-history']" routerLinkActive="active">History</a>
+      <a class="nav-link" (click)="logout()" style="cursor: pointer;">Logout</a>
+    </ng-container>
+    <ng-container *ngIf="!isLoggedIn">
+      <a class="nav-link" (click)="navigateToLogin()" style="cursor: pointer;">Login</a>
+      <a class="nav-link" (click)="navigateToRegister()" style="cursor: pointer;">Register</a>
+    </ng-container>
+  </div>
+</nav>

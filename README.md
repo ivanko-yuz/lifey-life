@@ -1,5 +1,59 @@
 # LifeyLife
 
+A web application for managing life challenges and dares.
+
+## Setup Instructions
+
+1. Clone the repository
+2. Copy `appsettings.Example.json` to `appsettings.Development.json` and update the values:
+   - Set your database connection string
+   - Generate a secure JWT secret key (minimum 16 characters)
+   - Update other configuration values as needed
+
+3. Install dependencies:
+   ```bash
+   # Backend
+   dotnet restore
+   
+   # Frontend
+   cd LifeyLife.App/ClientApp
+   npm install
+   ```
+
+4. Set up the database:
+   ```bash
+   # Run migrations
+   dotnet ef database update
+   ```
+
+5. Run the application:
+   ```bash
+   # Development mode
+   ./dev.sh
+   ```
+
+## Development
+
+- Backend API runs on https://localhost:5555
+- Frontend runs on http://localhost:4200
+
+## Security Notes
+
+- Never commit sensitive configuration files
+- Keep your JWT secret key secure
+- Use environment variables for production deployments
+- Regularly rotate secrets and keys
+
+## Contributing
+
+1. Create a new branch for your feature
+2. Make your changes
+3. Submit a pull request
+
+## License
+
+[Your License Here]
+
 ### Idea
 
 ### Idea
