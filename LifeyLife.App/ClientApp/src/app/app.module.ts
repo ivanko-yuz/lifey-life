@@ -14,17 +14,20 @@ import { MatListModule } from '@angular/material/list';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './shared/nav-menu/nav-menu.component';
+import { LanguageSelectorComponent } from './shared/components/language-selector/language-selector.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { RandomDareComponent } from './random-dare/random-dare.component';
 import { RandomeDareHistoryComponent } from './random-dare-history/random-dare-history.component';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
+    LanguageSelectorComponent,
     HomeComponent,
     CounterComponent,
     RandomDareComponent,
@@ -43,6 +46,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
+    SharedModule,
     AuthenticationModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/home', pathMatch: 'full' },

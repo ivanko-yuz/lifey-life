@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { API_ENDPOINTS } from '../shared/constants/api.constants';
+import { LanguageService, LocalizationType } from '../shared/services/language.service';
+import { TranslationService } from '../shared/services/translation.service';
 
 interface RandomDare {
   uuid: string;
   context: string;
+  language: number;
   experienceGained: number;
   givenTime: number;
 }
@@ -21,7 +24,11 @@ export class RandomDareComponent implements OnInit {
   timer: number = 0;
   timerInterval: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private languageService: LanguageService,
+    private translationService: TranslationService
+  ) {}
 
   ngOnInit(): void {
     this.getRandomDare();
@@ -43,7 +50,12 @@ export class RandomDareComponent implements OnInit {
       clearInterval(this.timerInterval);
     }
 
-    this.http.get<RandomDare>(API_ENDPOINTS.RANDOM_DARE)
+    // Get current language preference and always pass it as parameter
+    const currentLanguage = this.languageService.getCurrentLanguage();
+    let params = new HttpParams();
+    params = params.set('language', currentLanguage.toString());
+
+    this.http.get<RandomDare>(API_ENDPOINTS.RANDOM_DARE, { params })
       .subscribe({
         next: (dare) => {
           this.currentDare = dare;
@@ -51,7 +63,7 @@ export class RandomDareComponent implements OnInit {
           this.startTimer(dare.givenTime);
         },
         error: (error) => {
-          this.error = error.error.message || 'Failed to get random dare';
+          this.error = error.error.message || this.translationService.get('randomDare.failedToGet');
           this.isLoading = false;
         }
       });
@@ -82,7 +94,7 @@ export class RandomDareComponent implements OnInit {
           this.getRandomDare();
         },
         error: (error) => {
-          this.error = error.error.message || 'Failed to complete dare';
+          this.error = error.error.message || this.translationService.get('randomDare.failedToComplete');
           this.isLoading = false;
         }
       });

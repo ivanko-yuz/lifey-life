@@ -6,38 +6,47 @@
         <div class="col-md-6">
           <div class="card shadow">
             <div class="card-header">
-              <h3 class="text-center mb-0">Register</h3>
+              <h3 class="text-center mb-0">{{ 'auth.register.title' | translate }}</h3>
             </div>
             <div class="card-body">
               <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                 <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
+                  <label for="email" class="form-label">{{ 'auth.email' | translate }}</label>
                   <input type="email" class="form-control" id="email" formControlName="email" required>
                   <div class="text-danger" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['required']">
-                    Email is required
+                    {{ 'auth.emailRequired' | translate }}
                   </div>
                   <div class="text-danger" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['email']">
-                    Please enter a valid email
+                    {{ 'auth.emailInvalid' | translate }}
                   </div>
                 </div>
 
                 <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
+                  <label for="password" class="form-label">{{ 'auth.password' | translate }}</label>
                   <input type="password" class="form-control" id="password" formControlName="password" required>
                   <div class="text-danger" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['required']">
-                    Password is required
+                    {{ 'auth.passwordRequired' | translate }}
                   </div>
                   <div class="text-danger" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['minlength']">
-                    Password must be at least 6 characters
+                    {{ 'auth.passwordMinLength' | translate }}
                   </div>
                 </div>
 
                 <div class="mb-3">
-                  <label for="confirmPassword" class="form-label">Confirm Password</label>
+                  <label for="confirmPassword" class="form-label">{{ 'auth.confirmPassword' | translate }}</label>
                   <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" required>
                   <div class="text-danger" *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.errors?.['mismatch']">
-                    Passwords do not match
+                    {{ 'auth.passwordsMismatch' | translate }}
                   </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="preferredLanguage" class="form-label">{{ 'auth.preferredLanguage' | translate }}</label>
+                  <select class="form-control" id="preferredLanguage" formControlName="preferredLanguage" required>
+                    <option *ngFor="let lang of languages" [value]="lang.value">
+                      {{ lang.label }}
+                    </option>
+                  </select>
                 </div>
 
                 <div class="text-danger mb-3" *ngIf="error">
@@ -47,7 +56,7 @@
                 <div class="d-grid">
                   <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid || isLoading">
                     <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
-                    Register
+                    {{ 'auth.registerButton' | translate }}
                   </button>
                 </div>
               </form>

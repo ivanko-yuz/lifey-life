@@ -7,6 +7,8 @@ public interface IAccountsService
 {
     Task<bool> CreateUser(User user, string password);
     Task<User> FindByName(string userName);
+    Task<User> FindById(Guid userId);
+    Task<bool> UpdateUser(User user);
     Task<bool> CheckPassword(User user, string password);
     string GetUserName(ClaimsPrincipal principal);
     string GetUserId(ClaimsPrincipal principal);

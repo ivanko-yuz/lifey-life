@@ -1,0 +1,30 @@
+.language-selector {
+  display: inline-block;
+}
+
+.language-select {
+  background-color: var(--darker-bg);
+  border: 1px solid var(--neon-yellow);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.language-select:hover {
+  border-color: var(--neon-yellow-light);
+  box-shadow: 0 0 5px var(--neon-yellow-light);
+}
+
+.language-select:focus {
+  outline: none;
+  border-color: var(--neon-yellow-light);
+  box-shadow: 0 0 8px var(--neon-yellow-light);
+}
+
+.language-select option {
+  background-color: var(--darker-bg);
+  color: white;
+}

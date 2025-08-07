@@ -78,6 +78,21 @@ public class AccountsService : IAccountsService
         return await _accountsDataService.FindByName(userName);
     }
 
+    public async Task<User> FindById(Guid userId)
+    {
+        return await _accountsDataService.FindById(userId);
+    }
+
+    public async Task<bool> UpdateUser(User user)
+    {
+        if (user == null)
+        {
+            throw new ArgumentNullException(nameof(user));
+        }
+
+        return await _accountsDataService.UpdateUser(user);
+    }
+
     public async Task<bool> CheckPassword(User user, string password)
     {
         if (user == null)

@@ -8,15 +8,14 @@
         <div class="col-md-8">
           <div class="card">
             <div class="card-header">
-              <h2 class="text-center mb-0">Welcome to LifeyLife</h2>
+              <h2 class="text-center mb-0">{{ 'home.welcome' | translate }}</h2>
             </div>
             <div class="card-body">
               <div class="text-center">
-                <p class="lead">Your journey to self-improvement starts here!</p>
-                <p>Get random dares, complete them, and earn experience points.</p>
+                <p class="lead">{{ 'home.description' | translate }}</p>
                 <div class="mt-4">
-                  <a routerLink="/random-dare" class="btn btn-primary me-3">Get a Random Dare</a>
-                  <a routerLink="/random-dare-history" class="btn btn-secondary">View History</a>
+                  <a routerLink="/random-dare" class="btn btn-primary me-3">{{ 'nav.randomDare' | translate }}</a>
+                  <a routerLink="/random-dare-history" class="btn btn-secondary">{{ 'nav.history' | translate }}</a>
                 </div>
               </div>
             </div>

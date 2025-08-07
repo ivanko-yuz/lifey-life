@@ -3,12 +3,12 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">
-          <h2 class="text-center mb-0">Random Dare</h2>
+          <h2 class="text-center mb-0">{{ 'randomDare.title' | translate }}</h2>
         </div>
         <div class="card-body">
           <div *ngIf="isLoading" class="text-center">
             <div class="spinner-border text-warning" role="status">
-              <span class="visually-hidden">Loading...</span>
+              <span class="visually-hidden">{{ 'randomDare.loading' | translate }}</span>
             </div>
           </div>
 
@@ -20,23 +20,23 @@
             <h3 class="mb-4">{{ currentDare.context }}</h3>
             <div class="dare-info">
               <div class="info-item">
-                <span class="label">Experience Points:</span>
+                <span class="label">{{ 'randomDare.experiencePoints' | translate }}</span>
                 <span class="value">{{ currentDare.experienceGained }} XP</span>
               </div>
               <div class="info-item">
-                <span class="label">Time Given:</span>
-                <span class="value">{{ currentDare.givenTime }} minutes</span>
+                <span class="label">{{ 'randomDare.timeGiven' | translate }}</span>
+                <span class="value">{{ currentDare.givenTime }} {{ 'randomDare.minutes' | translate }}</span>
               </div>
             </div>
             <div class="mt-4">
-              <button class="btn btn-primary me-3" (click)="completeDare()">Complete Dare</button>
-              <button class="btn btn-secondary" (click)="getRandomDare()">Get Another Dare</button>
+              <button class="btn btn-primary me-3" (click)="completeDare()">{{ 'randomDare.complete' | translate }}</button>
+              <button class="btn btn-secondary" (click)="getRandomDare()">{{ 'randomDare.getAnother' | translate }}</button>
             </div>
           </div>
 
           <div *ngIf="!currentDare && !isLoading" class="text-center">
-            <p>No dare available at the moment.</p>
-            <button class="btn btn-primary" (click)="getRandomDare()">Get New Dare</button>
+            <p>{{ 'randomDare.noAvailable' | translate }}</p>
+            <button class="btn btn-primary" (click)="getRandomDare()">{{ 'randomDare.getNew' | translate }}</button>
           </div>
         </div>
       </div>

@@ -18,7 +18,8 @@ namespace LifeyLife.Data.DataServices.Authentication
             const string query = @"SELECT 
                             uuid as Uuid,
                             email as Email,
-                            password_hash as PasswordHash
+                            password_hash as PasswordHash,
+                            preferred_language as PreferredLanguage
                         FROM public.user
                         WHERE email = @Email;";
 
@@ -30,7 +31,8 @@ namespace LifeyLife.Data.DataServices.Authentication
             const string query = @"SELECT 
                             uuid as Uuid,
                             email as Email,
-                            password_hash as PasswordHash
+                            password_hash as PasswordHash,
+                            preferred_language as PreferredLanguage
                         FROM public.user
                         WHERE uuid = @Uuid;";
 
@@ -43,18 +45,39 @@ namespace LifeyLife.Data.DataServices.Authentication
                         (
                             uuid,
                             email,
-                            password_hash
+                            password_hash,
+                            preferred_language
                         ) VALUES (
                             @Uuid,
                             @Email,
-                            @PasswordHash
+                            @PasswordHash,
+                            @PreferredLanguage
                         );";
 
             var result = await _dbAdapter.ExecuteCommand(query, new
             {
                 user.Uuid,
                 user.Email,
-                user.PasswordHash
+                user.PasswordHash,
+                PreferredLanguage = user.PreferredLanguage.ToString()
+            });
+
+            return result > 0;
+        }
+
+        public async Task<bool> UpdateUser(User user)
+        {
+            const string query = @"UPDATE public.user
+                        SET 
+                            email = @Email,
+                            preferred_language = @PreferredLanguage
+                        WHERE uuid = @Uuid;";
+
+            var result = await _dbAdapter.ExecuteCommand(query, new
+            {
+                user.Uuid,
+                user.Email,
+                PreferredLanguage = user.PreferredLanguage.ToString()
             });
 
             return result > 0;
