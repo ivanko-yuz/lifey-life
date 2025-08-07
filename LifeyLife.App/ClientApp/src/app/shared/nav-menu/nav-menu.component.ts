@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -11,10 +12,11 @@ export class NavMenuComponent implements OnInit {
   isLoggedIn = false;
   isAuthPage = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isAuthPage = event.url === '/login' || event.url === '/register';
+        this.checkAuthStatus(); // Update auth status on navigation
       }
     });
   }
@@ -28,11 +30,11 @@ export class NavMenuComponent implements OnInit {
   }
 
   checkAuthStatus(): void {
-    this.isLoggedIn = !!localStorage.getItem('token');
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    this.authService.logout();
     this.isLoggedIn = false;
     this.router.navigate(['/']);
   }

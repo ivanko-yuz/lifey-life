@@ -5,5 +5,7 @@ export const API_ENDPOINTS = {
   REGISTRATION: `${API_BASE_URL}/accounts/register`,
   RANDOM_DARE: `${API_BASE_URL}/random-dare`,
   RANDOM_DARE_HISTORY: `${API_BASE_URL}/random-dare-history`,
-  COMPLETE_DARE: (uuid: string) => `${API_BASE_URL}/random-dare/Complete`
+  COMPLETE_DARE: `${API_BASE_URL}/random-dare/Complete`,
+  GET_PROFILE: `${API_BASE_URL}/accounts/profile`,
+  UPDATE_LANGUAGE: `${API_BASE_URL}/accounts/language`
 }; 

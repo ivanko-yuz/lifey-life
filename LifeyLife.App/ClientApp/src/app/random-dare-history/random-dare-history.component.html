@@ -3,12 +3,12 @@
     <div class="col-md-8">
       <div class="card shadow">
         <div class="card-header">
-          <h3 class="text-center mb-0">Dare History</h3>
+          <h3 class="text-center mb-0">{{ 'history.title' | translate }}</h3>
         </div>
         <div class="card-body">
           <div *ngIf="loading" class="text-center">
             <div class="spinner-border text-primary" role="status">
-              <span class="visually-hidden">Loading...</span>
+              <span class="visually-hidden">{{ 'history.loading' | translate }}</span>
             </div>
           </div>
 
@@ -18,7 +18,7 @@
 
           <div *ngIf="!loading && !error">
             <div *ngIf="history.length === 0" class="text-center text-muted">
-              <p>No completed dares yet. Start by getting a random dare!</p>
+              <p>{{ 'history.noHistory' | translate }}</p>
             </div>
 
             <div *ngIf="history.length > 0" class="list-group">

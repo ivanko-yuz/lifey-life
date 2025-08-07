@@ -51,7 +51,7 @@ namespace LifeyLife.Data.DataServices.Authentication
                             @Uuid,
                             @Email,
                             @PasswordHash,
-                            @PreferredLanguage
+                            @PreferredLanguage::language
                         );";
 
             var result = await _dbAdapter.ExecuteCommand(query, new
@@ -59,7 +59,7 @@ namespace LifeyLife.Data.DataServices.Authentication
                 user.Uuid,
                 user.Email,
                 user.PasswordHash,
-                PreferredLanguage = user.PreferredLanguage.ToString()
+                PreferredLanguage = user.PreferredLanguage.ToString().ToLower()
             });
 
             return result > 0;
@@ -70,14 +70,14 @@ namespace LifeyLife.Data.DataServices.Authentication
             const string query = @"UPDATE public.user
                         SET 
                             email = @Email,
-                            preferred_language = @PreferredLanguage
+                            preferred_language = @PreferredLanguage::language
                         WHERE uuid = @Uuid;";
 
             var result = await _dbAdapter.ExecuteCommand(query, new
             {
                 user.Uuid,
                 user.Email,
-                PreferredLanguage = user.PreferredLanguage.ToString()
+                PreferredLanguage = user.PreferredLanguage.ToString().ToLower()
             });
 
             return result > 0;

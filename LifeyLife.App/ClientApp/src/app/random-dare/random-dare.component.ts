@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { API_ENDPOINTS } from '../shared/constants/api.constants';
 import { LanguageService, LocalizationType } from '../shared/services/language.service';
 import { TranslationService } from '../shared/services/translation.service';
+import { AuthService } from '../shared/services/auth.service';
 
 interface RandomDare {
   uuid: string;
@@ -27,7 +28,8 @@ export class RandomDareComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private languageService: LanguageService,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -82,11 +84,17 @@ export class RandomDareComponent implements OnInit {
 
   completeDare(): void {
     if (!this.currentDare) return;
+
+    // Check if user is authenticated
+    if (!this.authService.isLoggedIn()) {
+      this.error = 'Please login to complete dares';
+      return;
+    }
     
     this.isLoading = true;
     this.error = '';
     
-    this.http.post(API_ENDPOINTS.COMPLETE_DARE(this.currentDare.uuid), this.currentDare)
+    this.authService.authenticatedPost(API_ENDPOINTS.COMPLETE_DARE, this.currentDare)
       .subscribe({
         next: () => {
           this.currentDare = null;
@@ -94,9 +102,16 @@ export class RandomDareComponent implements OnInit {
           this.getRandomDare();
         },
         error: (error) => {
-          this.error = error.error.message || this.translationService.get('randomDare.failedToComplete');
+          if (error.status === 401) {
+            this.authService.logout();
+            this.error = 'Please login to complete dares';
+          } else {
+            this.error = error.error.message || this.translationService.get('randomDare.failedToComplete');
+          }
           this.isLoading = false;
         }
       });
   }
+
+
 }

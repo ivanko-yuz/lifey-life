@@ -76,16 +76,18 @@ namespace LifeyLife.Api.Controllers
         
         [HttpPost]
         [Route("Complete")]
-        public async Task Complete([FromBody]RandomDare randomDare)
+        [Authorize]
+        public async Task<IActionResult> Complete([FromBody]RandomDare randomDare)
         {
-            await _historyDataService.SaveCompletedRandomDareInHistory(Guid.NewGuid(), randomDare.Uuid);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (!Guid.TryParse(userId, out var userGuid))
+            {
+                return BadRequest("Invalid user ID");
+            }
+
+            await _historyDataService.SaveCompletedRandomDareInHistory(userGuid, randomDare.Uuid);
+            return Ok();
         }
-        
-        [HttpPost]
-        [Route("Skip")]
-        public async Task Skip([FromBody]RandomDare randomDare)
-        {
-            await _historyDataService.SaveSkippedRandomDareInHistory(Guid.NewGuid(), randomDare.Uuid);
-        }
+
     }
 }

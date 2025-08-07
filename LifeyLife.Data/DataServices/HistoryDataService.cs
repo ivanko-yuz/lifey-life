@@ -21,9 +21,11 @@ public class HistoryDataService : IHistoryDataService
                                rdh.completed as {nameof(RandomDareHistory.Completed)}, 
                                rd.context as {nameof(RandomDareHistory.Context)} 
                         FROM public.random_dare_history rdh
-                        JOIN public.random_dare rd ON rdh.random_dares_uuid = rd.uuid;";
+                        JOIN public.random_dare rd ON rdh.random_dares_uuid = rd.uuid
+                        WHERE rdh.user_uuid = @UserUuid
+                        ORDER BY rdh.received_at_unix_utc_timestamp DESC;";
 
-        return (await _dbAdapter.GetMany<RandomDareHistory>(query, new { })).ToList();
+        return (await _dbAdapter.GetMany<RandomDareHistory>(query, new { UserUuid = userUuid })).ToList();
     }
 
     public async Task SaveCompletedRandomDareInHistory(Guid userUuid, Guid randomDareUuid)

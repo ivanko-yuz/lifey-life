@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { API_ENDPOINTS } from '../../shared/constants/api.constants';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     // If already logged in, redirect to home
-    if (localStorage.getItem('token')) {
+    if (this.authService.isLoggedIn()) {
       this.router.navigate(['/home']);
     }
   }
@@ -38,7 +40,7 @@ export class LoginComponent implements OnInit {
       this.http.post(API_ENDPOINTS.LOGIN, { email, password })
         .subscribe({
           next: (response: any) => {
-            localStorage.setItem('token', response.token);
+            this.authService.login(response.token);
             this.router.navigate(['/home']).then(() => {
               window.location.reload(); // Force a reload to update the navigation state
             });
