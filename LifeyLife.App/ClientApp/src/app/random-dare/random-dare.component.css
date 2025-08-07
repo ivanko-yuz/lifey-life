@@ -1,38 +1,7 @@
-.card {
-  background-color: rgba(18, 18, 18, 0.9);
-  border: 2px solid #ffd700;
-  box-shadow: 0 0 10px #ffd700,
-              0 0 20px #ffd700,
-              0 0 30px #ffd700;
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
-  animation: none !important;
-  transform: none !important;
-}
-
-.card-header {
-  background-color: rgba(0, 0, 0, 0.5);
-  border-bottom: 2px solid #ffd700;
-  padding: 1.5rem;
-}
-
-.card-header h2 {
-  color: #ffd700;
-  text-shadow: 0 0 5px #ffd700,
-               0 0 10px #ffd700,
-               0 0 15px #ffd700;
-  font-weight: bold;
-  letter-spacing: 2px;
-}
-
-.card-body {
-  padding: 2rem;
-  color: #fff;
-}
-
+/* Component-specific styles only */
 .dare-info {
   background-color: rgba(0, 0, 0, 0.3);
-  border: 1px solid #ffd700;
+  border: 1px solid var(--neon-yellow);
   border-radius: 10px;
   padding: 1.5rem;
   margin: 2rem 0;

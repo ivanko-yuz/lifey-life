@@ -1,3 +1,4 @@
+/* Component-specific styles only */
 :host {
   display: flex;
   flex-direction: column;

@@ -19,7 +19,7 @@ import { CounterComponent } from './counter/counter.component';
 import { RandomDareComponent } from './random-dare/random-dare.component';
 import { RandomeDareHistoryComponent } from './random-dare-history/random-dare-history.component';
 import { AuthenticationModule } from './authentication/authentication.module';
-import { HistoryComponent } from './history/history.component';
+
 
 @NgModule({
   declarations: [
@@ -28,8 +28,7 @@ import { HistoryComponent } from './history/history.component';
     HomeComponent,
     CounterComponent,
     RandomDareComponent,
-    RandomeDareHistoryComponent,
-    HistoryComponent
+    RandomeDareHistoryComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -50,7 +49,7 @@ import { HistoryComponent } from './history/history.component';
       { path: 'home', component: HomeComponent },
       { path: 'random-dare', component: RandomDareComponent },
       { path: 'random-dare-history', component: RandomeDareHistoryComponent },
-      { path: 'history', component: HistoryComponent },
+      { path: 'history', component: RandomeDareHistoryComponent },
       { path: '**', redirectTo: '/home', pathMatch: 'full' }
     ])
   ],
