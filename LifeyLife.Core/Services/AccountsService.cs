@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using LifeyLife.Core.Contracts.Authentication;
 using LifeyLife.Core.Models;
-using LifeyLife.Core.Utils;
+using Microsoft.AspNetCore.Identity;
 
 namespace LifeyLife.Core.Services;
 

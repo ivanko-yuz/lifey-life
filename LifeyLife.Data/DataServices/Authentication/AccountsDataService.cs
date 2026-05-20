@@ -1,6 +1,5 @@
 using LifeyLife.Core.Contracts.Authentication;
 using LifeyLife.Core.Models;
-using LifeyLife.Core.Utils;
 
 namespace LifeyLife.Data.DataServices.Authentication
 {
