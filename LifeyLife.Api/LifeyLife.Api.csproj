@@ -15,7 +15,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\LifeyLife.Core\LifeyLife.Core.csproj" />
-        <ProjectReference Include="..\LifeyLife.Data\LifeyLife.Data.csproj" />
     </ItemGroup>
 
 </Project>
