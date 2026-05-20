@@ -2,7 +2,7 @@ using Autofac;
 using LifeyLife.Core.Contracts.Authentication;
 using LifeyLife.Core.Models;
 using LifeyLife.Core.Services;
-using LifeyLife.Core.Utils;
+using Microsoft.AspNetCore.Identity;
 
 namespace LifeyLife.Core;
 

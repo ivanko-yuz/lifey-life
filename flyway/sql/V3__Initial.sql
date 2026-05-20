@@ -24,7 +24,7 @@ VALUES(uuid_generate_v4(), 'ua'::language, 'Робіть зарядку щора
 
 INSERT INTO public.random_dare
 (uuid, "language", context, experience_gained, given_time)
-VALUES(uuid_generate_v4(), 'ua'::language, 'Go for a run in the morning', 20, 0);
+VALUES(uuid_generate_v4(), 'en'::language, 'Go for a run in the morning', 20, 0);
 
 INSERT INTO public.random_dare
 (uuid, "language", context, experience_gained, given_time)

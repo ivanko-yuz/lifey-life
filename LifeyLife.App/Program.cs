@@ -49,17 +49,14 @@ builder.Services.AddAuthentication(opt =>
     };
 });
 
-// Add CORS
-builder.Services.AddCors(options =>
+if (builder.Environment.IsDevelopment())
 {
-    options.AddPolicy("AllowAll",
-        builder =>
-        {
-            builder.AllowAnyOrigin()
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
-        });
-});
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("Dev",
+            policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+    });
+}
 
 builder.Services.AddScoped<JwtHandler>();
 builder.Services.AddControllers();
@@ -81,7 +78,10 @@ else
     app.UseHttpsRedirection();
 }
 
-app.UseCors("AllowAll");
+if (app.Environment.IsDevelopment())
+{
+    app.UseCors("Dev");
+}
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();

@@ -1,6 +1,5 @@
 using LifeyLife.Core.Contracts.Authentication;
 using LifeyLife.Core.Models;
-using LifeyLife.Core.Utils;
 
 namespace LifeyLife.Data.DataServices.Authentication
 {
@@ -13,9 +12,9 @@ namespace LifeyLife.Data.DataServices.Authentication
             _dbAdapter = dbAdapter;
         }
 
-        public async Task<User> FindByName(string email)
+        public async Task<User?> FindByName(string email)
         {
-            const string query = @"SELECT 
+            const string query = @"SELECT
                             uuid as Uuid,
                             email as Email,
                             password_hash as PasswordHash,
@@ -23,12 +22,12 @@ namespace LifeyLife.Data.DataServices.Authentication
                         FROM public.user
                         WHERE email = @Email;";
 
-            return await _dbAdapter.GetSingle<User>(query, new { Email = email });
+            return await _dbAdapter.GetSingleOrDefault<User>(query, new { Email = email });
         }
 
-        public async Task<User> FindById(Guid uuid)
+        public async Task<User?> FindById(Guid uuid)
         {
-            const string query = @"SELECT 
+            const string query = @"SELECT
                             uuid as Uuid,
                             email as Email,
                             password_hash as PasswordHash,
@@ -36,7 +35,7 @@ namespace LifeyLife.Data.DataServices.Authentication
                         FROM public.user
                         WHERE uuid = @Uuid;";
 
-            return await _dbAdapter.GetSingle<User>(query, new { Uuid = uuid });
+            return await _dbAdapter.GetSingleOrDefault<User>(query, new { Uuid = uuid });
         }
 
         public async Task<bool> CreateUser(User user)
@@ -83,14 +82,14 @@ namespace LifeyLife.Data.DataServices.Authentication
             return result > 0;
         }
 
-        public async Task<string> GetPasswordHash(User user)
+        public async Task<string?> GetPasswordHash(User user)
         {
-            const string query = @"SELECT 
-                               password_hash as PasswordHash 
+            const string query = @"SELECT
+                               password_hash as PasswordHash
                         FROM public.user
                         WHERE uuid = @Uuid;";
 
-            return await _dbAdapter.GetSingle<string>(query, new { user.Uuid });
+            return await _dbAdapter.GetSingleOrDefault<string>(query, new { user.Uuid });
         }
     }
 }

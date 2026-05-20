@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using LifeyLife.Core.Contracts.Authentication;
 using LifeyLife.Core.Models;
-using LifeyLife.Core.Utils;
+using Microsoft.AspNetCore.Identity;
 
 namespace LifeyLife.Core.Services;
 
@@ -40,7 +40,7 @@ public class AccountsService : IAccountsService
                throw new InvalidOperationException("User ID claim not found");
     }
 
-    public async Task<User> GetUser(ClaimsPrincipal principal)
+    public async Task<User?> GetUser(ClaimsPrincipal principal)
     {
         if (principal == null)
         {
@@ -62,23 +62,23 @@ public class AccountsService : IAccountsService
             throw new ArgumentNullException(nameof(password));
         }
 
+        user.NormalizeEmail();
         var hash = _passwordHasher.HashPassword(user, password);
         user.SetHashedPassword(hash);
         return await _accountsDataService.CreateUser(user);
     }
 
-    public async Task<User> FindByName(string userName)
+    public async Task<User?> FindByName(string userName)
     {
         if (userName == null)
         {
             throw new ArgumentNullException(nameof(userName));
         }
 
-        userName = KeyNormalizer.NormalizeName(userName);
-        return await _accountsDataService.FindByName(userName);
+        return await _accountsDataService.FindByName(userName.ToLowerInvariant());
     }
 
-    public async Task<User> FindById(Guid userId)
+    public async Task<User?> FindById(Guid userId)
     {
         return await _accountsDataService.FindById(userId);
     }

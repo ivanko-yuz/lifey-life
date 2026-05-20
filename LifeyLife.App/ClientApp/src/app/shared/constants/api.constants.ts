@@ -1,11 +1,13 @@
-export const API_BASE_URL = 'https://localhost:5555/api';
+import { environment } from '../../../../environments/environment';
+
+const BASE = environment.apiBaseUrl;
 
 export const API_ENDPOINTS = {
-  LOGIN: `${API_BASE_URL}/accounts/login`,
-  REGISTRATION: `${API_BASE_URL}/accounts/register`,
-  RANDOM_DARE: `${API_BASE_URL}/random-dare`,
-  RANDOM_DARE_HISTORY: `${API_BASE_URL}/random-dare-history`,
-  COMPLETE_DARE: `${API_BASE_URL}/random-dare/Complete`,
-  GET_PROFILE: `${API_BASE_URL}/accounts/profile`,
-  UPDATE_LANGUAGE: `${API_BASE_URL}/accounts/language`
-}; 
+  LOGIN: `${BASE}/accounts/login`,
+  REGISTRATION: `${BASE}/accounts/register`,
+  RANDOM_DARE: `${BASE}/random-dare`,
+  RANDOM_DARE_HISTORY: `${BASE}/random-dare-history`,
+  COMPLETE_DARE: `${BASE}/random-dare/Complete`,
+  GET_PROFILE: `${BASE}/accounts/profile`,
+  UPDATE_LANGUAGE: `${BASE}/accounts/language`
+};

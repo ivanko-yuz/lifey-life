@@ -41,12 +41,10 @@ export class LoginComponent implements OnInit {
         .subscribe({
           next: (response: any) => {
             this.authService.login(response.token);
-            this.router.navigate(['/home']).then(() => {
-              window.location.reload(); // Force a reload to update the navigation state
-            });
+            this.router.navigate(['/home']);
           },
           error: (error) => {
-            this.error = error.error.message || 'An error occurred during login';
+            this.error = error?.error?.message ?? 'An error occurred during login';
           }
         });
     }
