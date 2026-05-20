@@ -62,6 +62,7 @@ public class AccountsService : IAccountsService
             throw new ArgumentNullException(nameof(password));
         }
 
+        user.NormalizeEmail();
         var hash = _passwordHasher.HashPassword(user, password);
         user.SetHashedPassword(hash);
         return await _accountsDataService.CreateUser(user);
@@ -74,8 +75,7 @@ public class AccountsService : IAccountsService
             throw new ArgumentNullException(nameof(userName));
         }
 
-        userName = KeyNormalizer.NormalizeName(userName);
-        return await _accountsDataService.FindByName(userName);
+        return await _accountsDataService.FindByName(userName.ToLowerInvariant());
     }
 
     public async Task<User?> FindById(Guid userId)

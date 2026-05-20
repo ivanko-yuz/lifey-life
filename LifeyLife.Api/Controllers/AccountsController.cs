@@ -35,9 +35,9 @@ namespace LifeyLife.Api.Controllers
             var user = new User
             {
                 Uuid = Guid.NewGuid(),
-                Email = registration.Email,
                 PreferredLanguage = registration.PreferredLanguage ?? LocalizationType.ua
             };
+            user.SetEmail(registration.Email);
 
             var result = await _accountsService.CreateUser(user, registration.Password);
             if (!result)
