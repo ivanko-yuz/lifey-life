@@ -40,7 +40,7 @@ public class AccountsService : IAccountsService
                throw new InvalidOperationException("User ID claim not found");
     }
 
-    public async Task<User> GetUser(ClaimsPrincipal principal)
+    public async Task<User?> GetUser(ClaimsPrincipal principal)
     {
         if (principal == null)
         {
@@ -67,7 +67,7 @@ public class AccountsService : IAccountsService
         return await _accountsDataService.CreateUser(user);
     }
 
-    public async Task<User> FindByName(string userName)
+    public async Task<User?> FindByName(string userName)
     {
         if (userName == null)
         {
@@ -78,7 +78,7 @@ public class AccountsService : IAccountsService
         return await _accountsDataService.FindByName(userName);
     }
 
-    public async Task<User> FindById(Guid userId)
+    public async Task<User?> FindById(Guid userId)
     {
         return await _accountsDataService.FindById(userId);
     }
