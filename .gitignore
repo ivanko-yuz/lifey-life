@@ -17,6 +17,7 @@ appsettings.*.json
 
 # IDE
 .idea/
+.claude/
 *.swp
 *.swo
 *~

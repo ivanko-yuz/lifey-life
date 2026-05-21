@@ -45,7 +45,8 @@ builder.Services.AddAuthentication(opt =>
         ValidIssuer = jwtSettings["validIssuer"],
         ValidAudience = jwtSettings["validAudience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-            .GetBytes(jwtSettings.GetSection("securityKey").Value))
+            .GetBytes(jwtSettings.GetSection("securityKey").Value
+                ?? throw new InvalidOperationException("JwtSettings:securityKey is not configured.")))
     };
 });
 
@@ -82,11 +83,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseCors("Dev");
 }
-app.UseAuthentication();
-app.UseAuthorization();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
 
+app.MapControllers();
 app.MapFallbackToFile("index.html");
 
 app.Run();
