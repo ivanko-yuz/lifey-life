@@ -6,10 +6,8 @@
           <h2 class="text-center mb-0">{{ 'randomDare.title' | translate }}</h2>
         </div>
         <div class="card-body">
-          <div *ngIf="isLoading" class="text-center">
-            <div class="spinner-border text-warning" role="status">
-              <span class="visually-hidden">{{ 'randomDare.loading' | translate }}</span>
-            </div>
+          <div *ngIf="isLoading" class="pixel-loader-wrap">
+            <div class="pixel-loader">████</div>
           </div>
 
           <div *ngIf="error" class="alert alert-danger">
