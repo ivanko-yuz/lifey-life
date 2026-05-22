@@ -24,5 +24,8 @@ public class LifeyLifeDataModule : Module
         builder.RegisterType<HistoryDataService>().As<IHistoryDataService>();
         builder.RegisterType<RandomDareDataService>().As<IRandomDareDataService>();
         builder.RegisterType<AccountsDataService>().As<IAccountsDataService>();
+        builder.RegisterType<CharacterDataService>().As<ICharacterDataService>();
+        builder.RegisterType<LeaderboardDataService>().As<ILeaderboardDataService>();
+        builder.RegisterType<TodoDataService>().As<ITodoDataService>();
     }
 }

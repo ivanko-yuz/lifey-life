@@ -14,12 +14,13 @@ public class HistoryDataService : IHistoryDataService
     }
     public async Task<List<RandomDareHistory>> ListHistory(Guid userUuid)
     {
-        const string query = $@"SELECT 
-                               rdh.user_uuid as {nameof(RandomDareHistory.UserUuid)}, 
-                               rdh.random_dares_uuid as {nameof(RandomDareHistory.RandomDareUuid)}, 
-                               to_timestamp(rdh.received_at_unix_utc_timestamp) as {nameof(RandomDareHistory.CompletedAt)}, 
-                               rdh.completed as {nameof(RandomDareHistory.Completed)}, 
-                               rd.context as {nameof(RandomDareHistory.Context)} 
+        const string query = $@"SELECT
+                               rdh.user_uuid              AS {nameof(RandomDareHistory.UserUuid)},
+                               rdh.random_dares_uuid      AS {nameof(RandomDareHistory.RandomDareUuid)},
+                               to_timestamp(rdh.received_at_unix_utc_timestamp) AS {nameof(RandomDareHistory.CompletedAt)},
+                               rdh.completed              AS {nameof(RandomDareHistory.Completed)},
+                               rd.context                 AS {nameof(RandomDareHistory.Context)},
+                               rd.experience_gained       AS {nameof(RandomDareHistory.ExperienceGained)}
                         FROM public.random_dare_history rdh
                         JOIN public.random_dare rd ON rdh.random_dares_uuid = rd.uuid
                         WHERE rdh.user_uuid = @UserUuid

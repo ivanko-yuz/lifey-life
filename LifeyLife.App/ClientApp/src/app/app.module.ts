@@ -19,6 +19,9 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { RandomDareComponent } from './random-dare/random-dare.component';
 import { RandomeDareHistoryComponent } from './random-dare-history/random-dare-history.component';
+import { CharacterComponent } from './character/character.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { TodoComponent } from './todo/todo.component';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -31,7 +34,10 @@ import { SharedModule } from './shared/shared.module';
     HomeComponent,
     CounterComponent,
     RandomDareComponent,
-    RandomeDareHistoryComponent
+    RandomeDareHistoryComponent,
+    CharacterComponent,
+    LeaderboardComponent,
+    TodoComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -54,6 +60,9 @@ import { SharedModule } from './shared/shared.module';
       { path: 'random-dare', component: RandomDareComponent },
       { path: 'random-dare-history', component: RandomeDareHistoryComponent },
       { path: 'history', component: RandomeDareHistoryComponent },
+      { path: 'character', component: CharacterComponent },
+      { path: 'leaderboard', component: LeaderboardComponent },
+      { path: 'todo', component: TodoComponent },
       { path: '**', redirectTo: '/home', pathMatch: 'full' }
     ])
   ],

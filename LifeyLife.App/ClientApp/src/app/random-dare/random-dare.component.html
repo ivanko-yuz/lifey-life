@@ -26,8 +26,8 @@
                 <span class="value">{{ currentDare.givenTime }} {{ 'randomDare.minutes' | translate }}</span>
               </div>
             </div>
-            <div class="mt-4">
-              <button class="btn btn-primary me-3" (click)="completeDare()">{{ 'randomDare.complete' | translate }}</button>
+            <div class="dare-actions mt-4">
+              <button class="btn btn-primary" (click)="completeDare()">{{ 'randomDare.complete' | translate }}</button>
               <button class="btn btn-secondary" (click)="getRandomDare()">{{ 'randomDare.getAnother' | translate }}</button>
             </div>
           </div>

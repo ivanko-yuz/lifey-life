@@ -16,17 +16,20 @@ namespace LifeyLife.Api.Controllers
         private readonly IRandomDareDataService _randomDareDataService;
         private readonly IHistoryDataService _historyDataService;
         private readonly IAccountsDataService _accountsDataService;
+        private readonly ICharacterDataService _characterDataService;
 
         public RandomDareController(
             ILogger<RandomDareController> logger,
-            IRandomDareDataService randomDareDataService, 
+            IRandomDareDataService randomDareDataService,
             IHistoryDataService historyDataService,
-            IAccountsDataService accountsDataService)
+            IAccountsDataService accountsDataService,
+            ICharacterDataService characterDataService)
         {
             _logger = logger;
             _randomDareDataService = randomDareDataService;
             _historyDataService = historyDataService;
             _accountsDataService = accountsDataService;
+            _characterDataService = characterDataService;
         }
 
         [HttpGet]
@@ -86,6 +89,7 @@ namespace LifeyLife.Api.Controllers
             }
 
             await _historyDataService.SaveCompletedRandomDareInHistory(userGuid, randomDare.Uuid);
+            await _characterDataService.AwardStatPoints(userGuid, randomDare.Category, randomDare.ExperienceGained);
             return Ok();
         }
 

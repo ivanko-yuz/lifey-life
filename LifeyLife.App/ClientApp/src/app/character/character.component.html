@@ -1,0 +1,59 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+
+      <!-- Loading -->
+      <div *ngIf="loading" class="pixel-loader-wrap">
+        <div class="pixel-loader">████</div>
+      </div>
+
+      <!-- Error -->
+      <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+      <!-- Character sheet -->
+      <div *ngIf="!loading && stats" class="card">
+        <div class="card-header">
+          <h2 class="text-center mb-0">{{ 'character.title' | translate }}</h2>
+        </div>
+        <div class="card-body">
+
+          <!-- Total level banner -->
+          <div class="char-banner">
+            <div class="char-banner-level">
+              <span class="banner-label">{{ 'character.totalLevel' | translate }}</span>
+              <span class="banner-value">{{ totalLevel }}</span>
+            </div>
+            <div class="char-banner-xp">
+              <span class="banner-xp-value">{{ stats.totalExperience }}</span>
+              <span class="banner-label">{{ 'character.totalXp' | translate }}</span>
+            </div>
+          </div>
+
+          <!-- Stat cards -->
+          <div class="stats-grid">
+            <div class="stat-card" *ngFor="let stat of statList" [class.wide]="stat.isWide">
+              <div class="stat-icon">{{ stat.icon }}</div>
+              <div class="stat-body">
+                <div class="stat-name">{{ stat.labelKey | translate }}</div>
+                <div class="stat-level-row">
+                  <span class="stat-lvl-badge">LVL {{ stat.level }}</span>
+                  <span class="stat-pts">{{ stat.points }} XP</span>
+                </div>
+                <div class="stat-bar-track">
+                  <div
+                    class="stat-bar-fill"
+                    [style.width.%]="stat.progress"
+                    [style.background-color]="stat.color">
+                  </div>
+                </div>
+                <div class="stat-bar-label">{{ stat.progress }} / {{ stat.nextLevel }}</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
@@ -16,7 +16,8 @@ export class NavMenuComponent implements OnInit {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isAuthPage = event.url === '/login' || event.url === '/register';
-        this.checkAuthStatus(); // Update auth status on navigation
+        this.checkAuthStatus();
+        this.isExpanded = false; // close mobile menu on every navigation
       }
     });
   }
@@ -25,8 +26,18 @@ export class NavMenuComponent implements OnInit {
     this.checkAuthStatus();
   }
 
+  /** Toggles the mobile hamburger menu. */
   toggle(): void {
     this.isExpanded = !this.isExpanded;
+  }
+
+  /** Close the menu when the user clicks anywhere outside the navbar. */
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event): void {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.navbar')) {
+      this.isExpanded = false;
+    }
   }
 
   checkAuthStatus(): void {
@@ -46,4 +57,4 @@ export class NavMenuComponent implements OnInit {
   navigateToRegister(): void {
     this.router.navigate(['/register']);
   }
-} 
+}

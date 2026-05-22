@@ -18,11 +18,14 @@ export class TranslationService {
 
   private translations: Translations = {
     // Navigation
-    'nav.home': { ua: 'Головна', en: 'Home' },
+    'nav.home':      { ua: 'Головна',   en: 'Home' },
+    'nav.character': { ua: 'Персонаж',  en: 'Character' },
     'nav.randomDare': { ua: 'Випадковий виклик', en: 'Random Dare' },
     'nav.history': { ua: 'Історія', en: 'History' },
     'nav.login': { ua: 'Увійти', en: 'Login' },
     'nav.register': { ua: 'Реєстрація', en: 'Register' },
+    'nav.leaderboard': { ua: 'Рейтинг', en: 'Leaderboard' },
+    'nav.todo':        { ua: 'Завдання', en: 'Tasks' },
     'nav.logout': { ua: 'Вийти', en: 'Logout' },
 
     // Random Dare Page
@@ -62,6 +65,48 @@ export class TranslationService {
     'history.failed': { ua: 'Не вдалося завантажити історію', en: 'Failed to load history' },
     'history.completed': { ua: 'Виконано', en: 'Completed' },
     'history.skipped': { ua: 'Пропущено', en: 'Skipped' },
+
+    // Character Page
+    'character.title':        { ua: 'Персонаж',          en: 'Character' },
+    'character.totalLevel':   { ua: 'Загальний рівень',  en: 'Total Level' },
+    'character.totalXp':      { ua: 'XP всього',         en: 'Total XP' },
+    'character.strength':     { ua: 'Сила',              en: 'Strength' },
+    'character.intelligence': { ua: 'Інтелект',          en: 'Intelligence' },
+    'character.charisma':     { ua: 'Харизма',           en: 'Charisma' },
+    'character.dexterity':    { ua: 'Спритність',        en: 'Dexterity' },
+    'character.vitality':        { ua: 'Живучість',         en: 'Vitality' },
+    'character.willpower':       { ua: 'Сила волі',         en: 'Willpower' },
+    'character.systematization': { ua: 'Систематизація',   en: 'Systematization' },
+    'character.loadFailed':      { ua: 'Не вдалося завантажити персонажа', en: 'Failed to load character' },
+
+    // Todo Page
+    'todo.title':           { ua: 'Мої завдання',                      en: 'My Tasks' },
+    'todo.today':           { ua: 'Сьогодні',                          en: 'Today' },
+    'todo.history':         { ua: 'Журнал',                            en: 'History' },
+    'todo.addPlaceholder':  { ua: 'Нове завдання...',                  en: 'New task...' },
+    'todo.add':             { ua: 'Додати',                            en: 'Add' },
+    'todo.empty':           { ua: 'Немає завдань на сьогодні',         en: 'No tasks for today' },
+    'todo.loading':         { ua: 'Завантаження...',                   en: 'Loading...' },
+    'todo.loadFailed':      { ua: 'Не вдалося завантажити завдання',   en: 'Failed to load tasks' },
+    'todo.addFailed':       { ua: 'Не вдалося додати завдання',        en: 'Failed to add task' },
+    'todo.finishDay':       { ua: 'Завершити день',                    en: 'Finish Day' },
+    'todo.finishing':       { ua: 'Збереження...',                     en: 'Saving...' },
+    'todo.finishFailed':    { ua: 'Не вдалося завершити день',         en: 'Failed to finish day' },
+    'todo.dayFinished':     { ua: 'День завершено!',                   en: 'Day finished!' },
+    'todo.xpEarned':        { ua: 'XP зароблено',                     en: 'XP earned' },
+    'todo.historyEmpty':    { ua: 'Ще немає завершених днів',          en: 'No finished days yet' },
+    'todo.historyFailed':   { ua: 'Не вдалося завантажити журнал',     en: 'Failed to load history' },
+    'todo.completed':       { ua: 'виконано',                         en: 'completed' },
+
+    // Leaderboard Page
+    'leaderboard.title':   { ua: 'Рейтинг гравців',              en: 'Leaderboard' },
+    'leaderboard.loading': { ua: 'Завантаження...',               en: 'Loading...' },
+    'leaderboard.empty':   { ua: 'Ще немає гравців у рейтингу',  en: 'No players on the board yet' },
+    'leaderboard.failed':  { ua: 'Не вдалося завантажити рейтинг', en: 'Failed to load leaderboard' },
+    'leaderboard.rank':    { ua: 'Місце',    en: 'Rank' },
+    'leaderboard.player':  { ua: 'Гравець',  en: 'Player' },
+    'leaderboard.level':   { ua: 'Рівень',   en: 'Level' },
+    'leaderboard.xp':      { ua: 'Досвід',   en: 'XP' },
 
     // Home Page
     'home.welcome': { ua: 'Ласкаво просимо до LifeyLife', en: 'Welcome to LifeyLife' },

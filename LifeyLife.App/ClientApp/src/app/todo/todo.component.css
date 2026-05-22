@@ -1,0 +1,326 @@
+/* ── Card header ─────────────────────────────────────────────────── */
+.todo-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── View tabs ───────────────────────────────────────────────────── */
+.view-tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.view-tab {
+  font-family: var(--pixel-font);
+  font-size: 0.38rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: transparent;
+  border: 2px solid var(--panel-border);
+  color: var(--dim);
+  padding: 6px 14px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: color 0.1s, border-color 0.1s;
+}
+
+.view-tab.active,
+.view-tab:hover {
+  color: var(--amber);
+  border-color: var(--amber);
+}
+
+/* ── Add row ─────────────────────────────────────────────────────── */
+.add-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.todo-input {
+  flex: 1;
+  font-family: var(--pixel-font);
+  font-size: 0.42rem;
+  background-color: #120A00;
+  border: 2px solid var(--panel-border);
+  color: var(--white);
+  padding: 10px 12px;
+  border-radius: 3px;
+  outline: none;
+  letter-spacing: 0.5px;
+}
+
+.todo-input:focus {
+  border-color: var(--amber);
+}
+
+.btn-add {
+  font-family: var(--pixel-font);
+  font-size: 0.38rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background-color: var(--amber);
+  color: var(--void);
+  border: 2px solid var(--amber-dark);
+  box-shadow: 2px 2px 0 var(--amber-dark);
+  padding: 10px 16px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: transform 0.06s, box-shadow 0.06s;
+  white-space: nowrap;
+}
+
+.btn-add:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--amber-dark);
+}
+
+.btn-add:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--amber-dark);
+}
+
+/* ── Empty state ─────────────────────────────────────────────────── */
+.todo-empty {
+  font-family: var(--pixel-font);
+  font-size: 0.42rem;
+  color: var(--dim);
+  text-align: center;
+  padding: 32px 0;
+  letter-spacing: 1px;
+}
+
+/* ── Todo rows ───────────────────────────────────────────────────── */
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.todo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #120A00;
+  border: 2px solid var(--panel-border);
+  border-radius: 4px;
+  padding: 10px 14px;
+  transition: transform 0.06s, box-shadow 0.06s;
+}
+
+.todo-row:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--shadow);
+}
+
+.todo-row.done {
+  opacity: 0.55;
+}
+
+.todo-row.done .todo-title {
+  text-decoration: line-through;
+  color: var(--dim);
+}
+
+.check-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  line-height: 1;
+  padding: 0;
+}
+
+.todo-title {
+  font-family: var(--pixel-font);
+  font-size: 0.42rem;
+  color: var(--white);
+  flex: 1;
+  letter-spacing: 0.5px;
+  word-break: break-word;
+}
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  font-family: var(--pixel-font);
+  font-size: 0.5rem;
+  color: var(--dim);
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 0 4px;
+  transition: color 0.1s;
+}
+
+.delete-btn:hover {
+  color: #ef4444;
+}
+
+/* ── Finish row ──────────────────────────────────────────────────── */
+.finish-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--panel-border);
+}
+
+.finish-summary {
+  font-family: var(--pixel-font);
+  font-size: 0.38rem;
+  color: var(--dim);
+  letter-spacing: 1px;
+}
+
+.btn-finish {
+  font-family: var(--pixel-font);
+  font-size: 0.38rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background-color: #22C55E;
+  color: #000;
+  border: 2px solid #15803D;
+  box-shadow: 2px 2px 0 #15803D;
+  padding: 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: transform 0.06s, box-shadow 0.06s;
+}
+
+.btn-finish:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 #15803D;
+}
+
+.btn-finish:active:not(:disabled) {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #15803D;
+}
+
+.btn-finish:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* ── Finish banner ───────────────────────────────────────────────── */
+.finish-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #052a0e;
+  border: 2px solid #22C55E;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.25);
+  border-radius: 4px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+}
+
+.finish-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.finish-text {
+  font-family: var(--pixel-font);
+  font-size: 0.42rem;
+  color: var(--white);
+  letter-spacing: 0.5px;
+}
+
+.finish-xp {
+  color: #22C55E;
+  font-size: 0.5rem;
+}
+
+/* ── History list ────────────────────────────────────────────────── */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-row {
+  background-color: #120A00;
+  border: 2px solid var(--panel-border);
+  border-radius: 4px;
+  padding: 14px 16px;
+  transition: transform 0.06s, box-shadow 0.06s;
+}
+
+.history-row:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--shadow);
+}
+
+.history-date {
+  font-family: var(--pixel-font);
+  font-size: 0.45rem;
+  color: var(--amber);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.history-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.history-ratio {
+  font-family: var(--pixel-font);
+  font-size: 0.38rem;
+  color: var(--white);
+  letter-spacing: 0.5px;
+}
+
+.history-xp {
+  font-family: var(--pixel-font);
+  font-size: 0.42rem;
+  color: #22C55E;
+  letter-spacing: 0.5px;
+}
+
+.history-bar-track {
+  width: 100%;
+  height: 6px;
+  background-color: #0A0600;
+  border: 1px solid var(--panel-border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.history-bar-fill {
+  height: 100%;
+  background-color: #3B82F6;
+  border-radius: 1px;
+  transition: width 0.4s ease;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .finish-row {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .btn-finish {
+    width: 100%;
+    text-align: center;
+  }
+
+  .add-row {
+    flex-direction: column;
+  }
+
+  .btn-add {
+    width: 100%;
+    text-align: center;
+  }
+}

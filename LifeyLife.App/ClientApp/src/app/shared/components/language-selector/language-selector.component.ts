@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { LanguageService, LocalizationType } from '../../services/language.service';
 
 @Component({
@@ -7,8 +7,9 @@ import { LanguageService, LocalizationType } from '../../services/language.servi
   styleUrls: ['./language-selector.component.css']
 })
 export class LanguageSelectorComponent implements OnInit {
-  currentLanguage: LocalizationType = LocalizationType.en;
+  currentLanguage: LocalizationType = LocalizationType.ua;
   languages = this.languageService.getAvailableLanguages();
+  isOpen = false;
 
   constructor(private languageService: LanguageService) {}
 
@@ -18,25 +19,32 @@ export class LanguageSelectorComponent implements OnInit {
     });
   }
 
-  onSelectChange(event: Event): void {
-    const select = event.target as HTMLSelectElement;
-    const language = +select.value as LocalizationType;
-    this.onLanguageChange(language);
+  get currentLabel(): string {
+    return this.languageService.getLanguageDisplayName(this.currentLanguage);
   }
 
-  onLanguageChange(language: LocalizationType): void {
+  toggle(): void {
+    this.isOpen = !this.isOpen;
+  }
+
+  selectLanguage(language: LocalizationType): void {
     this.languageService.setLanguage(language);
-    
-    // Update user preference in backend if user is logged in
+    this.isOpen = false;
+
     const token = localStorage.getItem('token');
     if (token) {
       this.languageService.updateUserLanguage(language).subscribe({
         next: () => console.log('Language preference updated'),
         error: (error) => {
-          console.warn('Failed to update language preference (may be unauthenticated):', error);
-          // Continue working - language preference is still stored locally
+          console.warn('Failed to update language preference:', error);
         }
       });
     }
+  }
+
+  /** Close the dropdown when the user clicks anywhere outside this component. */
+  @HostListener('document:click')
+  onDocumentClick(): void {
+    this.isOpen = false;
   }
 }

@@ -491,30 +491,127 @@ h3.mb-4,
   color: var(--dim);
 }
 
-/* ── Responsive ─────────────────────────────────────────────────── */
+/* ── Dare action buttons ────────────────────────────────────────── */
+.dare-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Hamburger button (hidden on desktop) ───────────────────────── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: 2px solid var(--panel-border);
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 8px 10px;
+  flex-shrink: 0;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 3px;
+  background-color: var(--amber);
+  border-radius: 1px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Hamburger → X animation */
+.nav-hamburger.open span:nth-child(1) { transform: rotate(45deg)  translate(5px, 8px); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: translateX(-6px); }
+.nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -8px); }
+
+/* ── Mobile (≤768 px) ───────────────────────────────────────────── */
 @media (max-width: 768px) {
+
+  /* Navbar: replace wrapping links with a hamburger drawer */
   .navbar {
-    padding: 12px 16px;
-    height: auto;
-    flex-wrap: wrap;
-    gap: 8px;
+    padding: 0 16px;
+    height: 56px;
+    position: relative;    /* anchor for the absolute dropdown */
   }
 
   .navbar-brand { font-size: 0.6rem; }
 
+  .nav-hamburger { display: flex; }
+
+  /* Collapsed by default; becomes visible when .open is added */
   .nav-links {
-    gap: 2px;
-    flex-wrap: wrap;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: var(--void);
+    border-bottom: 4px solid var(--amber);
+    box-shadow: 0 8px 0 rgba(0,0,0,0.7);
+    padding: 8px 0 16px;
+    z-index: 99;
+    gap: 0;
   }
 
+  .nav-links.open { display: flex; }
+
+  /* Full-width rows with generous tap targets (≥44 px) */
+  .nav-link {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--panel-border);
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    white-space: normal;
+    text-align: left;
+    width: 100%;
+  }
+
+  .nav-link:last-child { border-bottom: none; }
+
+  /* Language selector at the top of the drawer */
+  .nav-links app-language-selector {
+    border-bottom: 1px solid var(--panel-border);
+    padding: 4px 0 4px 6px;
+  }
+
+  /* Cards */
+  .card-body    { padding: 20px 16px; }
+  .card-header  { padding: 14px 16px; }
+
+  .card-header h1,
+  .card-header h2,
+  .card-header h3 { font-size: 0.55rem; }
+
+  /* Dare action buttons: stack vertically */
+  .dare-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dare-actions .btn { width: 100%; }
+
+  /* General buttons */
   .btn {
     font-size: 0.42rem;
     padding: 12px 16px;
   }
 
-  .card-body { padding: 20px 16px; }
+  /* Dare info: stack label above value on narrow screens */
+  .info-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
 
-  .card-header h1,
-  .card-header h2,
-  .card-header h3 { font-size: 0.55rem; }
+/* ── Very small phones (≤480 px) ────────────────────────────────── */
+@media (max-width: 480px) {
+  .card-body   { padding: 16px 12px; }
+  .card-header { padding: 12px 14px; }
 }

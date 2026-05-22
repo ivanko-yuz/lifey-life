@@ -1,15 +1,35 @@
 <nav class="navbar" *ngIf="!isAuthPage">
+
   <a class="navbar-brand" [routerLink]="['/']">LifeyLife</a>
-  <div class="nav-links">
+
+  <!-- Hamburger — visible only on mobile -->
+  <button
+    class="nav-hamburger"
+    [class.open]="isExpanded"
+    (click)="toggle(); $event.stopPropagation()"
+    aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- Link list — collapses to a drawer on mobile -->
+  <div class="nav-links" [class.open]="isExpanded">
     <app-language-selector></app-language-selector>
+
     <ng-container *ngIf="isLoggedIn">
-      <a class="nav-link" [routerLink]="['/random-dare']" routerLinkActive="active">{{ 'nav.randomDare' | translate }}</a>
-      <a class="nav-link" [routerLink]="['/random-dare-history']" routerLinkActive="active">{{ 'nav.history' | translate }}</a>
-      <a class="nav-link" (click)="logout()" style="cursor: pointer;">{{ 'nav.logout' | translate }}</a>
+      <a class="nav-link" [routerLink]="['/random-dare']"         routerLinkActive="active">{{ 'nav.randomDare' | translate }}</a>
+      <a class="nav-link" [routerLink]="['/random-dare-history']" routerLinkActive="active">{{ 'nav.history'    | translate }}</a>
+      <a class="nav-link" [routerLink]="['/character']"           routerLinkActive="active">{{ 'nav.character'  | translate }}</a>
+      <a class="nav-link" [routerLink]="['/todo']"                routerLinkActive="active">{{ 'nav.todo'       | translate }}</a>
+      <a class="nav-link" [routerLink]="['/leaderboard']"         routerLinkActive="active">{{ 'nav.leaderboard'| translate }}</a>
+      <a class="nav-link" (click)="logout()" style="cursor:pointer;">{{ 'nav.logout' | translate }}</a>
     </ng-container>
+
     <ng-container *ngIf="!isLoggedIn">
-      <a class="nav-link" (click)="navigateToLogin()" style="cursor: pointer;">{{ 'nav.login' | translate }}</a>
-      <a class="nav-link" (click)="navigateToRegister()" style="cursor: pointer;">{{ 'nav.register' | translate }}</a>
+      <a class="nav-link" (click)="navigateToLogin()"    style="cursor:pointer;">{{ 'nav.login'    | translate }}</a>
+      <a class="nav-link" (click)="navigateToRegister()" style="cursor:pointer;">{{ 'nav.register' | translate }}</a>
     </ng-container>
   </div>
+
 </nav>

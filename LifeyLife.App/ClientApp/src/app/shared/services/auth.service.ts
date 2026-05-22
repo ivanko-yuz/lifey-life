@@ -59,4 +59,8 @@ export class AuthService {
   authenticatedPut<T>(url: string, body: any): Observable<T> {
     return this.http.put<T>(url, body, this.getAuthenticatedHttpOptions());
   }
+
+  authenticatedDelete<T = any>(url: string): Observable<T> {
+    return this.http.delete<T>(url, this.getAuthenticatedHttpOptions());
+  }
 }

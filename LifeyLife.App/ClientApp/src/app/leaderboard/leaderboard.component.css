@@ -1,0 +1,89 @@
+/* ── Table container ────────────────────────────────────────────── */
+.lb-table {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ── Shared row layout ──────────────────────────────────────────── */
+.lb-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 90px 110px;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 2px solid var(--panel-border);
+  border-radius: 4px;
+  background-color: #120A00;
+  transition: transform 0.06s, box-shadow 0.06s;
+}
+
+.lb-row:not(.lb-header):hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--shadow);
+}
+
+/* ── Header row ─────────────────────────────────────────────────── */
+.lb-header {
+  background-color: var(--header-bg);
+  border-color: var(--header-border);
+  padding: 8px 16px;
+}
+
+.lb-header .lb-col {
+  font-family: var(--pixel-font);
+  font-size: 0.35rem;
+  color: var(--dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── Data columns ───────────────────────────────────────────────── */
+.lb-col {
+  font-family: var(--pixel-font);
+  font-size: 0.42rem;
+  color: var(--white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lb-col-rank  { font-size: 0.9rem; text-align: center; }
+.lb-col-level { color: var(--amber); text-align: center; }
+.lb-col-xp    { color: var(--xp-green); text-align: right; letter-spacing: 0.5px; }
+
+/* ── Medal rows ─────────────────────────────────────────────────── */
+.lb-gold   { border-color: #F5C018; box-shadow: 0 0 8px rgba(245, 192, 24, 0.35); }
+.lb-silver { border-color: #C0C0C0; box-shadow: 0 0 8px rgba(192, 192, 192, 0.25); }
+.lb-bronze { border-color: #CD7F32; box-shadow: 0 0 8px rgba(205, 127, 50, 0.25); }
+
+/* ── Empty state ────────────────────────────────────────────────── */
+.lb-empty {
+  font-family: var(--pixel-font);
+  font-size: 0.45rem;
+  color: var(--dim);
+  text-align: center;
+  padding: 32px 0;
+  letter-spacing: 1px;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .lb-row {
+    grid-template-columns: 50px 1fr 70px 90px;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+}
+
+/* On very small phones, drop the Level column to keep things readable */
+@media (max-width: 480px) {
+  .lb-row {
+    grid-template-columns: 40px 1fr 85px;
+    gap: 6px;
+    padding: 8px 10px;
+  }
+
+  /* Hide the 3rd child (Level) in both header and data rows */
+  .lb-col:nth-child(3) { display: none; }
+}
