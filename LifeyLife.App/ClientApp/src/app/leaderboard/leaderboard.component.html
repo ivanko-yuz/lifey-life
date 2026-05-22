@@ -1,0 +1,56 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+
+        <div class="card-header">
+          <h2 class="text-center mb-0">{{ 'leaderboard.title' | translate }}</h2>
+        </div>
+
+        <div class="card-body">
+
+          <!-- Loading -->
+          <div *ngIf="loading" class="pixel-loader-wrap">
+            <div class="pixel-loader">████</div>
+          </div>
+
+          <!-- Error -->
+          <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+          <!-- Empty state -->
+          <div *ngIf="!loading && !error && entries.length === 0" class="lb-empty">
+            {{ 'leaderboard.empty' | translate }}
+          </div>
+
+          <!-- Table -->
+          <div *ngIf="!loading && entries.length > 0" class="lb-table">
+
+            <!-- Header -->
+            <div class="lb-row lb-header">
+              <span class="lb-col lb-col-rank">{{ 'leaderboard.rank' | translate }}</span>
+              <span class="lb-col lb-col-player">{{ 'leaderboard.player' | translate }}</span>
+              <span class="lb-col lb-col-level">{{ 'leaderboard.level' | translate }}</span>
+              <span class="lb-col lb-col-xp">{{ 'leaderboard.xp' | translate }}</span>
+            </div>
+
+            <!-- Rows -->
+            <div
+              *ngFor="let entry of entries"
+              class="lb-row"
+              [class.lb-gold]="entry.rank === 1"
+              [class.lb-silver]="entry.rank === 2"
+              [class.lb-bronze]="entry.rank === 3">
+
+              <span class="lb-col lb-col-rank">{{ rankLabel(entry.rank) }}</span>
+              <span class="lb-col lb-col-player">{{ entry.displayName }}</span>
+              <span class="lb-col lb-col-level">LVL {{ entry.totalLevel }}</span>
+              <span class="lb-col lb-col-xp">{{ entry.totalExperience }} XP</span>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

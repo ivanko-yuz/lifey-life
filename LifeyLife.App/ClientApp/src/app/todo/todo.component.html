@@ -1,0 +1,136 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+
+        <!-- Header + view toggle -->
+        <div class="card-header todo-header">
+          <h2 class="text-center mb-0">{{ 'todo.title' | translate }}</h2>
+          <div class="view-tabs">
+            <button
+              class="view-tab"
+              [class.active]="view === 'today'"
+              (click)="switchView('today')">
+              {{ 'todo.today' | translate }}
+            </button>
+            <button
+              class="view-tab"
+              [class.active]="view === 'history'"
+              (click)="switchView('history')">
+              {{ 'todo.history' | translate }}
+            </button>
+          </div>
+        </div>
+
+        <div class="card-body">
+
+          <!-- Loading -->
+          <div *ngIf="loading" class="pixel-loader-wrap">
+            <div class="pixel-loader">████</div>
+          </div>
+
+          <!-- Error -->
+          <div *ngIf="error" class="alert alert-danger mb-3">{{ error }}</div>
+
+          <!-- ── TODAY VIEW ────────────────────────────────────────── -->
+          <div *ngIf="!loading && view === 'today'">
+
+            <!-- Finish-day result banner -->
+            <div *ngIf="finishResult" class="finish-banner">
+              <span class="finish-icon">✅</span>
+              <span class="finish-text">
+                {{ 'todo.dayFinished' | translate }}
+                {{ finishResult.completedCount }}/{{ finishResult.totalCount }}
+                {{ 'todo.completed' | translate }}
+                &nbsp;·&nbsp;
+                <span class="finish-xp">+{{ finishResult.experienceAwarded }} XP</span>
+              </span>
+            </div>
+
+            <!-- Add item form -->
+            <div class="add-row">
+              <input
+                class="todo-input"
+                type="text"
+                [(ngModel)]="newTitle"
+                placeholder="{{ 'todo.addPlaceholder' | translate }}"
+                (keyup.enter)="addItem()"
+                maxlength="200" />
+              <button class="btn-add" (click)="addItem()">{{ 'todo.add' | translate }}</button>
+            </div>
+
+            <!-- Empty state -->
+            <div *ngIf="items.length === 0 && !finishResult" class="todo-empty">
+              {{ 'todo.empty' | translate }}
+            </div>
+
+            <!-- Todo list -->
+            <div class="todo-list" *ngIf="items.length > 0">
+              <div
+                *ngFor="let item of items"
+                class="todo-row"
+                [class.done]="item.isCompleted">
+
+                <button class="check-btn" (click)="toggle(item)" title="Toggle">
+                  {{ item.isCompleted ? '✅' : '⬜' }}
+                </button>
+                <span class="todo-title">{{ item.title }}</span>
+                <button class="delete-btn" (click)="deleteItem(item)" title="Delete">✕</button>
+
+              </div>
+            </div>
+
+            <!-- Finish day -->
+            <div class="finish-row" *ngIf="!finishResult">
+              <div class="finish-summary" *ngIf="items.length > 0">
+                {{ completedCount }}/{{ items.length }} {{ 'todo.completed' | translate }}
+              </div>
+              <button
+                class="btn-finish"
+                (click)="finishDay()"
+                [disabled]="finishing">
+                {{ finishing ? ('todo.finishing' | translate) : ('todo.finishDay' | translate) }}
+              </button>
+            </div>
+
+          </div>
+
+          <!-- ── HISTORY VIEW ──────────────────────────────────────── -->
+          <div *ngIf="!loading && view === 'history'">
+
+            <div *ngIf="history.length === 0" class="todo-empty">
+              {{ 'todo.historyEmpty' | translate }}
+            </div>
+
+            <div class="history-list" *ngIf="history.length > 0">
+              <div *ngFor="let entry of history" class="history-row">
+
+                <div class="history-date">{{ formatDate(entry.dayDate) }}</div>
+
+                <div class="history-stats">
+                  <span class="history-ratio">
+                    {{ entry.completedCount }}/{{ entry.totalCount }}
+                    {{ 'todo.completed' | translate }}
+                  </span>
+                  <span class="history-xp" *ngIf="entry.experienceAwarded > 0">
+                    +{{ entry.experienceAwarded }} XP
+                  </span>
+                </div>
+
+                <div class="history-bar-track">
+                  <div
+                    class="history-bar-fill"
+                    [style.width.%]="entry.totalCount > 0 ? (entry.completedCount / entry.totalCount) * 100 : 0">
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

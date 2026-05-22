@@ -1,10 +1,19 @@
-<div class="language-selector">
-  <select 
-    [value]="currentLanguage" 
-    (change)="onSelectChange($event)" 
-    class="language-select">
-    <option *ngFor="let lang of languages" [value]="lang.value">
+<div class="lang-dropdown" (click)="$event.stopPropagation()">
+
+  <!-- toggle — styled identically to .nav-link -->
+  <button class="nav-link lang-toggle" (click)="toggle()">
+    {{ currentLabel }}&nbsp;▾
+  </button>
+
+  <!-- fly-out options panel -->
+  <div class="lang-menu" *ngIf="isOpen">
+    <button
+      *ngFor="let lang of languages"
+      class="lang-option"
+      [class.active]="lang.value === currentLanguage"
+      (click)="selectLanguage(lang.value)">
       {{ lang.label }}
-    </option>
-  </select>
+    </button>
+  </div>
+
 </div>

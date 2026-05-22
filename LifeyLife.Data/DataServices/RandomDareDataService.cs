@@ -26,11 +26,12 @@ public class RandomDareDataService : IRandomDareDataService
         try
         {
             var query = $@"SELECT
-                            uuid as {nameof(RandomDare.Uuid)},
-                            language as {nameof(RandomDare.Language)},
-                            context as {nameof(RandomDare.Context)},
-                            experience_gained as {nameof(RandomDare.ExperienceGained)},
-                            given_time as {nameof(RandomDare.GivenTime)}
+                            uuid              AS {nameof(RandomDare.Uuid)},
+                            language          AS {nameof(RandomDare.Language)},
+                            context           AS {nameof(RandomDare.Context)},
+                            experience_gained AS {nameof(RandomDare.ExperienceGained)},
+                            given_time        AS {nameof(RandomDare.GivenTime)},
+                            category          AS {nameof(RandomDare.Category)}
                         FROM public.random_dare
                         WHERE language = @Language::language
                         ORDER BY random()

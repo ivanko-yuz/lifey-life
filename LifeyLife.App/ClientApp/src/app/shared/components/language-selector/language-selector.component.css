@@ -1,30 +1,71 @@
-.language-selector {
+/* ── Wrapper ─────────────────────────────────────────────────────── */
+.lang-dropdown {
+  position: relative;
   display: inline-block;
 }
 
-.language-select {
-  background-color: var(--darker-bg);
-  border: 1px solid var(--neon-yellow);
-  color: white;
-  padding: 0.5rem;
-  border-radius: 4px;
-  font-size: 0.9rem;
+/* ── Toggle button — inherits global .nav-link, resets <button> chrome ── */
+.lang-toggle {
+  /* reset browser button defaults */
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent; /* matches .nav-link bottom border */
+  padding: 8px 14px;
+  /* inherit nav-link text styles from global CSS */
+  font-family: var(--pixel-font);
+  font-size: 0.42rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--dim);
+  white-space: nowrap;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: color 0.1s, border-color 0.1s;
 }
 
-.language-select:hover {
-  border-color: var(--neon-yellow-light);
-  box-shadow: 0 0 5px var(--neon-yellow-light);
+.lang-toggle:hover,
+.lang-dropdown.open .lang-toggle {
+  color: var(--amber);
+  border-bottom-color: var(--amber);
 }
 
-.language-select:focus {
-  outline: none;
-  border-color: var(--neon-yellow-light);
-  box-shadow: 0 0 8px var(--neon-yellow-light);
+/* ── Drop-down panel ─────────────────────────────────────────────── */
+.lang-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  background-color: var(--panel);
+  border: 3px solid var(--panel-border);
+  box-shadow: 4px 4px 0 var(--shadow);
+  display: flex;
+  flex-direction: column;
+  min-width: 130px;
+  z-index: 200;
 }
 
-.language-select option {
-  background-color: var(--darker-bg);
-  color: white;
+/* ── Individual option ───────────────────────────────────────────── */
+.lang-option {
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--panel-border);
+  font-family: var(--pixel-font);
+  font-size: 0.38rem;
+  color: var(--dim);
+  padding: 10px 14px;
+  cursor: pointer;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.8;
+  white-space: nowrap;
+  transition: color 0.1s, background-color 0.1s;
+}
+
+.lang-option:last-child {
+  border-bottom: none;
+}
+
+.lang-option:hover,
+.lang-option.active {
+  color: var(--amber);
+  background-color: rgba(245, 166, 35, 0.08);
 }

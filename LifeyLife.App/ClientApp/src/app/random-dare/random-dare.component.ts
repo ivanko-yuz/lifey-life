@@ -11,6 +11,7 @@ interface RandomDare {
   language: number;
   experienceGained: number;
   givenTime: number;
+  category: number;   // maps to DareCategory enum on the backend
 }
 
 @Component({
